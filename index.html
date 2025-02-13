@@ -562,6 +562,33 @@ function openModal(img) {
 //     });
 // });
 
+document.querySelectorAll("p").forEach(p => {
+    p.innerHTML = p.textContent.replace(/(^\s*\w|[.!?]\s*\w)/g, match => match.toUpperCase());
+});
+
+
+// open in browser functionality
+
+window.onload = function () {
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
+
+    // Detect Facebook Messenger's in-app browser
+    if (ua.includes("FBAN") || ua.includes("FBAV")) {
+        const url = window.location.href;
+        
+        // Redirect to Chrome (Android) using intent scheme
+        if (/android/i.test(ua)) {
+            window.location.href = `intent://${url.replace(/^https?:\/\//, '')}#Intent;scheme=https;package=com.android.chrome;end;`;
+        } 
+        // Redirect to Safari (iPhone) by prompting user
+        else if (/iPhone|iPad|iPod/i.test(ua)) {
+            alert("Please open this link in Safari or Chrome for a better experience.");
+        }
+    }
+};
+
+
+
 
     </script>
   </body>
