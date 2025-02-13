@@ -161,6 +161,83 @@
     border-radius: 4px !important;
 }
 
+input[type="date"] {
+  appearance: none; /* Removes default styles */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  display: block;
+  width: 100%; /* Make it full width */
+  max-width: 250px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: white;
+  color: #333;
+  text-transform: uppercase;
+  position: relative;
+}
+
+/* Add a placeholder for iPhone
+input[type="date"]::before {
+  content: attr(data-placeholder);
+  width: 100%;
+  color: #999;
+}
+
+input[type="date"]:valid::before {
+  content: "";
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 1;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  background: url('https://cdn-icons-png.flaticon.com/512/747/747310.png') no-repeat center;
+  background-size: contain;
+} */
+
+input[type="date"] {
+  appearance: none; /* Removes default styles */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  display: block;
+  width: 100%; /* Make it full width */
+  max-width: 250px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: white;
+  color: #333;
+  text-transform: uppercase;
+  position: relative;
+}
+
+/* Add a placeholder for iPhone */
+input[type="date"]::before {
+  content: attr(data-placeholder);
+  width: 100%;
+  color: #999;
+}
+
+input[type="date"]:valid::before {
+  content: "";
+}
+
+/* Add a calendar icon */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 1;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  background: url('https://cdn-icons-png.flaticon.com/512/747/747310.png') no-repeat center;
+  background-size: contain;
+}
+
+
+
 
     </style>
   </head>
@@ -299,7 +376,7 @@
       <!-- Add this to Slide 11 or a new slide -->
       <div class="slide" data-slide="11">
         <h2>Anong petsa tayo aalis?</h2>
-        <input type="date" id="date-choice" />
+        <input type="date" id="date-choice" data-placeholder="Select a date" />
         <button onclick="prevSlide()">⇠ Back</button>
         <button onclick="nextSlide()">Next ⇢</button>
       </div>
