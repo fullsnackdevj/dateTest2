@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espesyal na Pag-anyaya</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=Old+Standard+TT&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        /* Valentine's Theme */
+        body {
+            margin: 0;
+            background-color: #ffebee;
+            font-family: 'Old Standard TT', serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url('https://www.transparenttextures.com/patterns/old-wall.png');
+        }
+
+        .slide {
+            display: none;
+            padding: 2rem;
+            max-width: 800px;
+            background: #fff0f5;
+            border: 10px solid #ff4081;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            text-align: center;
+            border-radius: 15px;
+        }
+
+        .active-slide {
+            display: block;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cinzel Decorative', cursive;
+            color: #d81b60;
+        }
+
+        button {
+            padding: 12px 25px;
+            background-color: #ff4081;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 10px;
+            margin: 10px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #c2185b;
+        }
+
+        .evade-btn {
+            position: absolute;
+            transition: all 0.3s ease;
+        }
+
+        .food-gallery, .drink-gallery {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 20px 0;
+        }
+
+        .food-item, .drink-item {
+            padding: 1rem;
+            border: 3px solid #ff4081;
+            cursor: pointer;
+            background: white;
+            border-radius: 8px;
+        }
+
+        .receipt {
+            background: white;
+            padding: 2rem;
+            font-family: 'Courier New', Courier, monospace;
+            border: 2px dashed #000;
+            text-align: center;
+        }
+
+        .map-container img {
+            max-width: 100%;
+            border: 3px solid #ff4081;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slides-container">
+        <!-- Slide 1 -->
+        <div class="slide active-slide" data-slide="1">
+            <h2>Hi G, enjoy ba ang view ng mga litrato mo dito?</h2>
+            <p>Oo alam ko, hindi naman talaga lol, pasensya na. Alam kong weird, pero pwede bang magpatuloy ka?</p>
+            <button onclick="nextSlide()">Next ➔</button>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide" data-slide="2">
+            <h2>Sa totoo lang, hindi ko alam kung bakit ko ito ginagawa...</h2>
+            <p>Pero pinagdasal ko ito sa Panginoon, at naniniwala ako na Siya ang nag-udyok sa akin na gawin ito.</p>
+            <button onclick="nextSlide()">Next ➔</button>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide" data-slide="3">
+            <h2>Alam kong nakakagulat ito...</h2>
+            <p>Pero gusto kong ipakita sa'yo na malinaw at seryoso ang intensyon ko sa ginagawa kong ito. Sana tapusin mo hanggang dulo.</p>
+            <button onclick="endApp()">End This</button>
+            <button onclick="nextSlide()">Ok, Continue</button>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide" data-slide="6">
+            <h2>Malapit na matapos, please bear with me...</h2>
+            <p>Gusto kitang imbitahan sa isang cafe. Bumili ako ng 2 tickets para sa atin, gusto mo bang sumama?</p>
+            <button class="yes-btn" onclick="nextSlide()">Oo naman! 😊</button>
+            <button class="evade-btn" onmouseover="moveButton(this)">Hindi muna</button>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide" data-slide="7">
+            <h2>Salamat sa Panginoon! Nahanap namin ang cafe sa Kamias...</h2>
+            <div class="map-container">
+                <img src="cafe-map.jpg" alt="Cafe Map">
+            </div>
+            <button onclick="nextSlide()">Next ➔</button>
+        </div>
+
+        <!-- Slide 13 -->
+        <div class="slide" data-slide="13">
+            <div class="receipt">
+                <h3>🖨️ Resibo ng Pag-anyaya 🖨️</h3>
+                <p>Petsa: <span id="receipt-date"></span></p>
+                <p>Oras: <span id="receipt-time"></span></p>
+                <p>Lugar: Kamias Cafe</p>
+                <button onclick="saveReceipt()">I-save ang Resibo</button>
+            </div>
+        </div>
+
+        <!-- Slide 14 -->
+        <div class="slide" data-slide="14">
+            <h2>I-send mo sa akin ang screenshot sa Messenger!</h2>
+            <p>See you then! 😊</p>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = document.querySelectorAll('.slide').length;
+
+        function nextSlide() {
+            document.querySelector(`[data-slide="${currentSlide}"]`).classList.remove('active-slide');
+
+            currentSlide++;
+            if (currentSlide <= totalSlides) {
+                document.querySelector(`[data-slide="${currentSlide}"]`).classList.add('active-slide');
+            }
+        }
+
+        function moveButton(btn) {
+            btn.style.transform = `translate(${Math.random() * 100}px, ${Math.random() * 100}px)`;
+        }
+
+        function saveReceipt() {
+            html2canvas(document.querySelector('.receipt')).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'resibo-ng-pag-anyaya.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        }
+
+        function endApp() {
+            alert("Salamat sa oras mo! Sana magkita pa tayo sa susunod.");
+            window.close();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector(`[data-slide="1"]`).classList.add('active-slide');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="tl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Espesyal na Pag-anyaya</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=Old+Standard+TT&display=swap"
+      rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+      /* Valentine's Theme */
+      body {
+        margin: 0;
+        background-color: #ffebee;
+        font-family: "Old Standard TT", serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-image: url("https://www.transparenttextures.com/patterns/old-wall.png");
+      }
+
+      .slide {
+        display: none;
+        padding: 2rem;
+        max-width: 800px;
+        background: #fff0f5;
+        border: 10px solid #ff4081;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        border-radius: 15px;
+      }
+
+      .active-slide {
+        display: block;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: "Cinzel Decorative", cursive;
+        color: #d81b60;
+      }
+
+      button {
+        padding: 12px 25px;
+        background-color: #ff4081;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 10px;
+        margin: 10px;
+        transition: 0.3s;
+      }
+
+      button:hover {
+        background-color: #c2185b;
+      }
+
+      .evade-btn {
+        position: absolute;
+        transition: all 0.3s ease;
+      }
+
+      .receipt {
+        background: white;
+        padding: 2rem;
+        font-family: "Courier New", Courier, monospace;
+        border: 2px dashed #000;
+        text-align: center;
+        width: 300px;
+        margin: 0 auto;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .receipt h3 {
+        border-bottom: 1px dashed #000;
+        padding-bottom: 10px;
+      }
+      .receipt p {
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slides-container">
+      <!-- Slide 1 -->
+      <div class="slide active-slide" data-slide="1">
+        <h2>Hi Gwen, enjoying the view of your photos here?</h2>
+        <p>
+          yeah i know , youre not lol, sorryy. I know its kinda weird but could
+          you please proceed?
+        </p>
+        <button onclick="nextSlide()">Next ➔</button>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="slide" data-slide="2">
+        <h2>
+          Actually, hindi ko alam itong ginagawa kong ito kahit nung umpisa
+          palang...
+        </h2>
+        <p>
+          but i really pray this to the Lord and i believe na sya din nag
+          impress na gawin ko ang mga ito.
+        </p>
+        <button onclick="prevSlide()">⬅ Back</button>
+        <button onclick="nextSlide()">Next ➔</button>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="slide" data-slide="3">
+        <h2>I know na itoy kinagugulat mo din and biglaan...</h2>
+        <p>
+          but i just really want na maipakita sayo na clear and tunay ang
+          intensyon ko sa ginagawa kong ito. sana tapusin mo hanggang dulo.
+        </p>
+        <button onclick="prevSlide()">⬅ Back</button>
+        <button onclick="nextSlide()">Ok, Continue</button>
+      </div>
+
+      <!-- Slide 4 -->
+      <div class="slide" data-slide="4">
+        <h2>Alam kong hndi naman tayo madalas nagkakausap...</h2>
+        <p>
+          very casual lang tayo na magkakilala, kaya siguro weird talaga itong
+          mga ito sayo. Hindi kasi ako nagbibgay or nagpapakita ng interest at
+          motibo sa babae if wala akong balak na ipursue at kung hndi naman
+          inilalagay ng Lord sa puso ko.
+        </p>
+        <button onclick="prevSlide()">⬅ Back</button>
+        <button onclick="nextSlide()">Next na, drama mo eh</button>
+      </div>
+
+      <!-- Slide 5 -->
+      <div class="slide" data-slide="5">
+        <h2>Yeah, I built this app, from day 1 to this day, para sayo...</h2>
+        <p>
+          dhil pinagpray koto sa Lord na magkaroon ako ng unique and sariling
+          way na may touch ng passion ko and at the same time makita mo ang
+          sincerity ko sa feelings ko sayo. ' resume ' ang isinuggest ng nanay
+          mo sakin' thanks din sa kanya nagkaroon ako ng sariling idea khit
+          hindi sya actually na resume 😂
+        </p>
+        <button onclick="prevSlide()">⬅ Back</button>
+        <button onclick="nextSlide()">Haha! Ok, Next</button>
+      </div>
+
+      <!-- Slide 6 -->
+      <div class="slide" data-slide="6">
+        <h2>Eto na malapit na, matatapos na please bear with me...</h2>
+        <p>
+          honestly, gusto kitang makausap and i would like to invite you to a
+          cafe. I bought 2 tickets for us, would you like to come?
+        </p>
+        <button class="yes-btn" onclick="nextSlide()">Yes! 😊</button>
+        <button class="evade-btn" onmouseover="moveButton(this)">No!</button>
+      </div>
+
+      <!-- Slide 7 -->
+      <div class="slide" data-slide="7">
+        <h2>Thank you Lord!, Cool! ...</h2>
+        <p>
+          located ang cafe na ito sa Kamias, chineck nanamin ito ni ricknel
+          HAHA.
+        </p>
+        <button onclick="prevSlide()">⬅ Back</button>
+        <button onclick="nextSlide()">Next ➔</button>
+      </div>
+
+      <!-- Slide 8 -->
+      <div class="slide" data-slide="8">
+        <h2>Pili ka ng food mo.</h2>
+        <input
+          type="text"
+          id="food-choice"
+          placeholder="Halimbawa: Spaghetti" />
+        <button onclick="prevSlide()">⬅ Back</button>
+        <button onclick="nextSlide()">Next ➔</button>
+      </div>
+
+      <!-- Slide 9 -->
+      <div class="slide" data-slide="9">
+        <h2>At ano naman ang gusto mong inumin?</h2>
+        <input
+          type="text"
+          id="drink-choice"
+          placeholder="Halimbawa: Iced Coffee" />
+        <button onclick="prevSlide()">⬅ Back</button>
+        <button onclick="nextSlide()">Next ➔</button>
+      </div>
+
+      <!-- Slide 10 -->
+      <div class="slide" data-slide="10">
+        <h2>Maam Cash po ba or Card?💰💳</h2>
+        <button onclick="prevSlide()">⬅ Back</button>
+        <button onclick="nextSlide()">😂 Joke lang!, Next ➔</button>
+      </div>
+
+      <!-- Add this to Slide 11 or a new slide -->
+      <div class="slide" data-slide="11">
+        <h2>Anong petsa tayo aalis?</h2>
+        <input type="date" id="date-choice" />
+        <button onclick="prevSlide()">⬅ Back</button>
+        <button onclick="nextSlide()">Next ➔</button>
+      </div>
+
+      <!-- Slide 12 -->
+      <div class="slide" data-slide="12">
+        <h2>What time ka dapat nasa inyo na?</h2>
+        <input type="time" id="time-choice" />
+        <button onclick="prevSlide()">⬅ Back</button>
+        <button onclick="nextSlide()">Next ➔</button>
+      </div>
+
+      <!-- Slide 13 -->
+      <div class="slide" data-slide="13">
+        <h2>Perfect! Isulat ko na sa resibo.</h2>
+        <button onclick="prevSlide()">⬅ Back</button>
+        <button onclick="nextSlide()">Next ➔</button>
+      </div>
+
+      <!-- Add this as Slide 14 -->
+      <div class="slide" data-slide="14">
+        <h2>See you then! 😊</h2>
+        <p>Here's a summary of our plans:</p>
+        <ul>
+          <li>Date: <span id="summary-date"></span></li>
+          <li>Time: <span id="summary-time"></span></li>
+          <li>Food: <span id="summary-food"></span></li>
+          <li>Drink: <span id="summary-drink"></span></li>
+        </ul>
+        <button onclick="saveReceipt()">I-save ang Resibo</button>
+      </div>
+    </div>
+
+    <script>
+      let currentSlide = 1;
+      const totalSlides = document.querySelectorAll(".slide").length;
+
+      function nextSlide() {
+        if (
+          currentSlide === 8 &&
+          !document.getElementById("food-choice").value
+        ) {
+          alert("Please enter your food choice!");
+          return;
+        }
+        if (
+          currentSlide === 9 &&
+          !document.getElementById("drink-choice").value
+        ) {
+          alert("Please enter your drink choice!");
+          return;
+        }
+        if (
+          currentSlide === 11 &&
+          !document.getElementById("date-choice").value
+        ) {
+          alert("Please select a date!");
+          return;
+        }
+        if (
+          currentSlide === 12 &&
+          !document.getElementById("time-choice").value
+        ) {
+          alert("Please select a time!");
+          return;
+        }
+
+        document
+          .querySelector(`[data-slide="${currentSlide}"]`)
+          .classList.remove("active-slide");
+        currentSlide++;
+        if (currentSlide <= totalSlides) {
+          document
+            .querySelector(`[data-slide="${currentSlide}"]`)
+            .classList.add("active-slide");
+        }
+        updateReceipt();
+      }
+
+      function prevSlide() {
+        if (currentSlide > 1) {
+          document
+            .querySelector(`[data-slide="${currentSlide}"]`)
+            .classList.remove("active-slide");
+          currentSlide--;
+          document
+            .querySelector(`[data-slide="${currentSlide}"]`)
+            .classList.add("active-slide");
+        }
+      }
+
+      function moveButton(btn) {
+        const x = (Math.random() - 0.5) * 200; // Increase range
+        const y = (Math.random() - 0.5) * 200;
+        btn.style.transform = `translate(${x}px, ${y}px)`;
+      }
+
+      function updateReceipt() {
+        const date = document.getElementById("date-choice").value;
+        const time = document.getElementById("time-choice").value;
+        const food = document.getElementById("food-choice").value;
+        const drink = document.getElementById("drink-choice").value;
+
+        document.getElementById("receipt-date").innerText = date;
+        document.getElementById("receipt-time").innerText = time;
+        document.getElementById("receipt-food").innerText = food;
+        document.getElementById("receipt-drink").innerText = drink;
+
+        // Update summary
+        document.getElementById("summary-date").innerText = date;
+        document.getElementById("summary-time").innerText = time;
+        document.getElementById("summary-food").innerText = food;
+        document.getElementById("summary-drink").innerText = drink;
+      }
+
+      function saveReceipt() {
+        html2canvas(document.querySelector(".receipt")).then((canvas) => {
+          const link = document.createElement("a");
+          link.download = "resibo.png";
+          link.href = canvas.toDataURL();
+          link.click();
+        });
+      }
+    </script>
+  </body>
+</html>

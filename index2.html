@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Invite</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffe6e6;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: auto;
+        }
+
+        .slide {
+            display: none;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .active {
+            display: block;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            background: #ff4d4d;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        #noBtn {
+            position: absolute;
+        }
+
+        #receipt {
+            border: 1px dashed black;
+            padding: 10px;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="slide active" id="slide1">
+            <h2>Hi G, enjoying the view of your photos here?</h2>
+            <p>Yeah, I know, hindi ka naman talaga. Sorryyy! Medyo weird ito pero, could you please proceed?</p>
+            <button onclick="nextSlide()">Next</button>
+        </div>
+
+        <div class="slide" id="slide2">
+            <h2>Actually...</h2>
+            <p>Hindi ko alam itong ginagawa ko kahit nung umpisa pa lang. But I really prayed for this and I believe si Lord din ang nag-impress sa akin na gawin ito.</p>
+            <button onclick="nextSlide()">Next</button>
+        </div>
+
+        <div class="slide" id="slide3">
+            <p>Alam kong nagugulat ka at biglaan ito. Pero gusto ko lang ipakita na clear at malinaw ang intensyon ko. Sana tapusin mo ito. 🙏</p>
+            <button onclick="endApp()">End This</button>
+            <button onclick="nextSlide()">Ok, Continue</button>
+        </div>
+
+        <div class="slide" id="slide4">
+            <p>Hindi tayo madalas mag-usap, casual lang, at parehong nasa worship. Weird ito para sa'yo. Pero hindi ako nagpapakita ng interest kung wala akong balak ipursue.</p>
+            <button onclick="nextSlide()">Next na, drama ko eh</button>
+        </div>
+
+        <div class="slide" id="slide5">
+            <p>Yeah, I built this app, from day 1 to today, para sa'yo. Kasi pinagpray ko ito na magkaroon ng unique at personal approach. Salamat sa nanay mo sa "resume" idea. 😂</p>
+            <button onclick="nextSlide()">Next</button>
+        </div>
+
+        <div class="slide" id="slide6">
+            <p>Gusto kitang makausap at i-invite sa cafe. May 2 tickets ako. Sasama ka ba?</p>
+            <button onclick="nextSlide()">Yes</button>
+            <button id="noBtn" onmouseover="moveNoButton()">No</button>
+        </div>
+
+        <div class="slide" id="slide7">
+            <p>Cool! Located ang cafe sa Kamias. Ni-check namin ito ni Ricknel. HAHA.</p>
+            <button onclick="nextSlide()">Next</button>
+        </div>
+
+        <div class="slide" id="slide8">
+            <p>Anong gusto mong kainin dito? Order ka na!</p>
+            <button onclick="nextSlide()">Next</button>
+        </div>
+
+        <div class="slide" id="slide9">
+            <p>Drinks?</p>
+            <button onclick="nextSlide()">Next</button>
+        </div>
+
+        <div class="slide" id="slide10">
+            <p>Ma'am, cash po ba o card? 😂</p>
+            <button onclick="nextSlide()">Joke! Continue</button>
+        </div>
+
+        <div class="slide" id="slide11">
+            <p>Anong oras tayo aalis?</p>
+            <input type="time" id="timePicker">
+            <button onclick="nextSlide()">Next</button>
+        </div>
+
+        <div class="slide" id="slide12">
+            <p>Hanggang anong oras ka available?</p>
+            <input type="time" id="endTimePicker">
+            <button onclick="generateReceipt()">Check Receipt</button>
+        </div>
+
+        <div class="slide" id="slide13">
+            <div id="receipt">
+                <h3>Grocery Receipt</h3>
+                <p>Oras ng pag-alis: <span id="receiptTime"></span></p>
+                <p>Hanggang anong oras: <span id="receiptEndTime"></span></p>
+            </div>
+            <button onclick="saveReceipt()">Save Receipt</button>
+            <button onclick="nextSlide()">Next</button>
+        </div>
+
+        <div class="slide" id="slide14">
+            <p>Send screenshot sa Messenger ko. See you then! 😊</p>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+
+        function nextSlide() {
+            document.getElementById(`slide${currentSlide}`).classList.remove('active');
+            currentSlide++;
+            if (currentSlide <= 14) {
+                document.getElementById(`slide${currentSlide}`).classList.add('active');
+            }
+        }
+
+        function endApp() {
+            alert("Okay, respect! 😊");
+            window.close();
+        }
+
+        function moveNoButton() {
+            const noBtn = document.getElementById("noBtn");
+            const x = Math.random() * 200;
+            const y = Math.random() * 200;
+            noBtn.style.transform = `translate(${x}px, ${y}px)`;
+        }
+
+        function generateReceipt() {
+            const time = document.getElementById("timePicker").value;
+            const endTime = document.getElementById("endTimePicker").value;
+            document.getElementById("receiptTime").textContent = time;
+            document.getElementById("receiptEndTime").textContent = endTime;
+            nextSlide();
+        }
+
+        function saveReceipt() {
+            alert("Screenshot mo na lang muna! 😅 (Need HTML2Canvas for full save feature)");
+        }
+    </script>
+
+</body>
+</html>

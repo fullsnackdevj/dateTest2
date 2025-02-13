@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espesyal na Pag-anyaya</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=Old+Standard+TT&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        /* Base Styling */
+        body {
+            margin: 0;
+            background-color: #f5e6d3;
+            font-family: 'Old Standard TT', serif;
+            background-image: url('data:image/svg+xml,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.1"/></svg>');
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .slide {
+            display: none;
+            padding: 2rem;
+            max-width: 800px;
+            background: #fffaf0;
+            border: 15px solid #8B4513;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .active-slide {
+            display: block;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cinzel Decorative', cursive;
+            color: #5a2d0c;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #8B4513;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-family: 'Old Standard TT', serif;
+            margin: 10px;
+        }
+
+        button:hover {
+            background-color: #6b3e0e;
+        }
+
+        .evade-btn {
+            transition: all 0.3s ease;
+            position: absolute;
+        }
+
+        .food-gallery, .drink-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 20px 0;
+        }
+
+        .food-item, .drink-item {
+            border: 3px solid #8B4513;
+            padding: 1rem;
+            cursor: pointer;
+        }
+
+        .receipt {
+            background: white;
+            padding: 2rem;
+            font-family: 'Courier New', Courier, monospace;
+            border: 2px dashed #000;
+        }
+
+        .map-container img {
+            max-width: 100%;
+            border: 3px solid #8B4513;
+        }
+    </style>
+</head>
+<body>
+    <!-- Slide Container -->
+    <div class="slides-container">
+        <!-- Slide 1 -->
+        <div class="slide active-slide" data-slide="1">
+            <h2>Hi G, enjoy ba ang view ng mga litrato mo dito?</h2>
+            <p>Oo alam ko, hindi naman talaga lol, pasensya na. Alam kong weird, pero pwede bang magpatuloy ka?</p>
+            <div class="photo-grid">
+                <img src="placeholder1.jpg" alt="Photo 1" style="filter: grayscale(100%) brightness(70%)">
+                <img src="placeholder2.jpg" alt="Photo 2" style="filter: sepia(100%)">
+            </div>
+            <button onclick="nextSlide()">Next ➔</button>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide" data-slide="2">
+            <h2>Sa totoo lang, hindi ko alam kung bakit ko ito ginagawa...</h2>
+            <p>Pero pinagdasal ko ito sa Panginoon, at naniniwala ako na Siya ang nag-udyok sa akin na gawin ito.</p>
+            <button onclick="nextSlide()">Next ➔</button>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide" data-slide="3">
+            <h2>Alam kong nakakagulat ito...</h2>
+            <p>Pero gusto kong ipakita sa'yo na malinaw at seryoso ang intensyon ko sa ginagawa kong ito. Sana tapusin mo hanggang dulo.</p>
+            <button onclick="endApp()">End This</button>
+            <button onclick="nextSlide()">Ok, Continue</button>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide" data-slide="4">
+            <h2>Alam kong hindi tayo madalas mag-usap...</h2>
+            <p>Pareho naman kasi tayong nasa worship, kaya siguro weird ito para sa'yo. Hindi ako nagpapakita ng interest sa isang babae kung hindi ko siya seryosohin.</p>
+            <button onclick="nextSlide()">Next na drama ko eh</button>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide" data-slide="5">
+            <h2>Oo, ginawa ko itong app para sa'yo...</h2>
+            <p>Pinagdasal ko ito sa Panginoon na magkaroon ng unique at personal na paraan para maipakita ang sincerity ko sa'yo. Salamat din sa nanay mo sa suggestion na 'resume' kahit hindi naman talaga ito resume 😂</p>
+            <button onclick="nextSlide()">Next ➔</button>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide" data-slide="6">
+            <h2>Malapit na matapos, please bear with me...</h2>
+            <p>Gusto kitang imbitahan sa isang cafe. Bumili ako ng 2 tickets para sa atin, gusto mo bang sumama?</p>
+            <div class="poster-frame">
+                <img src="project-romeo-poster.jpg" alt="Event Poster">
+            </div>
+            <button class="yes-btn" onclick="selectOption('yes')">Oo naman! 😊</button>
+            <button class="evade-btn" onmouseover="moveButton(this)">Hindi muna</button>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide" data-slide="7">
+            <h2>Salamat sa Panginoon! Nahanap namin ang cafe sa Kamias...</h2>
+            <div class="map-container">
+                <img src="cafe-map.jpg" alt="Cafe Map">
+            </div>
+            <button onclick="nextSlide()">Next ➔</button>
+        </div>
+
+        <!-- Slide 8 -->
+        <div class="slide" data-slide="8">
+            <h2>Anong gusto mong kainin dito? Order ka na!</h2>
+            <div class="food-gallery">
+                <div class="food-item">Pasta</div>
+                <div class="food-item">Pizza</div>
+                <div class="food-item">Steak</div>
+            </div>
+            <button onclick="nextSlide()">Next ➔</button>
+        </div>
+
+        <!-- Slide 9 -->
+        <div class="slide" data-slide="9">
+            <h2>Anong gusto mong inumin?</h2>
+            <div class="drink-gallery">
+                <div class="drink-item">Coffee</div>
+                <div class="drink-item">Tea</div>
+                <div class="drink-item">Juice</div>
+            </div>
+            <button onclick="nextSlide()">Next ➔</button>
+        </div>
+
+        <!-- Slide 10 -->
+        <div class="slide" data-slide="10">
+            <h2>Ma'am, cash po ba o card? 😂</h2>
+            <p>Joke lang! Tara, continue!</p>
+            <button onclick="nextSlide()">Next ➔</button>
+        </div>
+
+        <!-- Slide 11 -->
+        <div class="slide" data-slide="11">
+            <h2>Anong oras tayo aalis?</h2>
+            <input type="time" id="departure-time">
+            <button onclick="nextSlide()">Next ➔</button>
+        </div>
+
+        <!-- Slide 12 -->
+        <div class="slide" data-slide="12">
+            <h2>Hanggang anong oras ka lang?</h2>
+            <input type="time" id="end-time">
+            <button onclick="nextSlide()">Check Receipt</button>
+        </div>
+
+        <!-- Slide 13 -->
+        <div class="slide" data-slide="13">
+            <div class="receipt">
+                <h3>🖨️ Resibo ng Pag-anyaya 🖨️</h3>
+                <p>Petsa: <span id="receipt-date"></span></p>
+                <p>Oras: <span id="receipt-time"></span></p>
+                <p>Lugar: Kamias Cafe</p>
+                <button onclick="saveReceipt()">I-save ang Resibo</button>
+            </div>
+        </div>
+
+        <!-- Slide 14 -->
+        <div class="slide" data-slide="14">
+            <h2>I-send mo sa akin ang screenshot sa Messenger!</h2>
+            <p>See you then! 😊</p>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 14;
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                document.querySelector(`[data-slide="${currentSlide}"]`).classList.remove('active-slide');
+                currentSlide++;
+                document.querySelector(`[data-slide="${currentSlide}"]`).classList.add('active-slide');
+            }
+        }
+
+        function moveButton(btn) {
+            btn.style.transform = `translate(${Math.random() * 100}px, ${Math.random() * 100}px)`;
+        }
+
+        function saveReceipt() {
+            html2canvas(document.querySelector('.receipt')).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'resibo-ng-pag-anyaya.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        }
+
+        function endApp() {
+            alert("Salamat sa oras mo! Sana magkita pa tayo sa susunod.");
+            window.close();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vintage Invitation to Gwen</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="reset.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=IM+Fell+English&display=swap" rel="stylesheet">
+    <style>
+      body {
+        display: grid;
+        font-family: 'IM Fell English', serif;
+        text-align: center;
+        background-color: #f4e9d8;
+        background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C7C5B' fill-opacity='0.2'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        place-content: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px;
+      }
+      .question-container {
+        margin: 20px;
+        background: #f4e9d8;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        display: inline-block;
+        max-width: 500px;
+        width: 100%;
+        border: 2px solid #8b735b;
+        background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%238B735B' fill-opacity='0.1'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      }
+      .hidden {
+        display: none;
+      }
+      .show {
+        display: inline-block;
+      }
+      .receipt-container {
+        margin-top: 20px;
+        background: #f4e9d8;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        font-family: 'IM Fell English', serif;
+        width: 100%;
+        max-width: 300px;
+        border: 2px dashed #8b735b;
+        background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%238B735B' fill-opacity='0.1'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      }
+      .receipt-header {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        border-bottom: 1px dashed #8b735b;
+        padding-bottom: 5px;
+        color: #8b735b;
+        font-family: 'Cinzel Decorative', cursive;
+      }
+      .receipt-content {
+        text-align: left;
+        color: #5a4a3a;
+      }
+      .receipt-footer {
+        border-top: 1px dashed #8b735b;
+        padding-top: 5px;
+        margin-top: 10px;
+        font-style: italic;
+        color: #8b735b;
+      }
+      button {
+        margin-top: 10px;
+        padding: 10px 20px;
+        background-color: #8b735b;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-family: 'IM Fell English', serif;
+        transition: background-color 0.3s ease;
+      }
+      button:hover {
+        background-color: #6b5a4b;
+      }
+      #options button {
+        display: block;
+        width: calc(100% - 10px);
+        margin: 5px auto;
+        padding: 10px;
+      }
+      .back-btn {
+        background-color: #6b5a4b;
+      }
+      .next-btn {
+        background-color: #8b735b;
+      }
+      @media (max-width: 768px) {
+        .question-container {
+          padding: 20px;
+        }
+        .receipt-container {
+          width: 90%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="question-container">
+        <h2 id="question">Hey Gwen, will you be my date to a special event?</h2>
+        <div id="options"></div>
+        <button id="backBtn" class="hidden back-btn">Back</button>
+        <button id="nextBtn" class="hidden next-btn">Next</button>
+      </div>
+      <div class="receipt-container hidden" id="receipt"></div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          text: "Gwen, what’s the best way I can reach you?",
+          type: "text",
+          key: "contact",
+        },
+        {
+          text: "On February 16th, 2025, at 7 PM (Philippine Time), there’s a special event. Can we go together?",
+          options: ["Absolutely!", "I’d love to!", "Let’s make it a date!"],
+          key: "confirmation",
+        },
+        {
+          text: "What’s your favorite way to enjoy a live acoustic night?",
+          options: ["Singing along", "Dancing", "Just listening"],
+          key: "preference",
+        },
+        {
+          text: "Any special requests for our date?",
+          type: "text",
+          key: "requests",
+        },
+      ];
+
+      let answers = {};
+      let currentQuestion = 0;
+      const questionEl = document.getElementById("question");
+      const optionsEl = document.getElementById("options");
+      const nextBtn = document.getElementById("nextBtn");
+      const backBtn = document.getElementById("backBtn");
+      const receiptEl = document.getElementById("receipt");
+
+      function loadQuestion() {
+        optionsEl.innerHTML = "";
+        nextBtn.classList.add("hidden");
+        let q = questions[currentQuestion];
+        questionEl.textContent = q.text;
+        backBtn.classList.toggle("hidden", currentQuestion === 0);
+        if (q.type) {
+          const input = document.createElement("input");
+          input.type = q.type;
+          input.value = answers[q.key] || "";
+          input.style.fontFamily = "'IM Fell English', serif";
+          input.style.border = "1px solid #8b735b";
+          input.style.borderRadius = "5px";
+          input.style.padding = "10px";
+          input.style.width = "100%";
+          input.oninput = (e) => {
+            answers[q.key] = e.target.value;
+            nextBtn.classList.toggle("hidden", !e.target.value.trim());
+          };
+          optionsEl.appendChild(input);
+          nextBtn.classList.toggle("hidden", !input.value.trim());
+        } else {
+          q.options.forEach((option) => {
+            const btn = document.createElement("button");
+            btn.textContent = option;
+            btn.onclick = () => {
+              answers[q.key] = option;
+              nextQuestion();
+            };
+            optionsEl.appendChild(btn);
+          });
+        }
+      }
+
+      function nextQuestion() {
+        if (!answers[questions[currentQuestion].key]) return;
+        currentQuestion++;
+        if (currentQuestion < questions.length) {
+          loadQuestion();
+        } else {
+          showReceipt();
+        }
+      }
+
+      function previousQuestion() {
+        if (currentQuestion > 0) {
+          currentQuestion--;
+          loadQuestion();
+        }
+      }
+
+      function showReceipt() {
+        document.querySelector(".question-container").classList.add("hidden");
+        receiptEl.classList.remove("hidden");
+        receiptEl.classList.add("show");
+
+        let receiptText = `<div class='receipt-header'>Our Special Date Details</div>`;
+        receiptText += `<div class='receipt-content'>`;
+        receiptText += `Event: Project Rones Live Acoustic Night<br>`;
+        receiptText += `Date: February 16th, 2025<br>`;
+        receiptText += `Time: 7:00 PM (Philippine Time)<br>`;
+        receiptText += `Location: Quezon City<br>`;
+        receiptText += `Your Contact: ${answers.contact}<br>`;
+        receiptText += `Your Preference: ${answers.preference}<br>`;
+        receiptText += `Special Requests: ${answers.requests || "None"}`;
+        receiptText += `</div>`;
+        receiptText += `<div class='receipt-footer'>I can't wait to spend this magical evening with you, Gwen! ❤️</div>`;
+
+        const saveBtn = document.createElement("button");
+        saveBtn.textContent = "Save Receipt";
+        saveBtn.onclick = saveReceipt;
+
+        receiptEl.innerHTML = receiptText;
+        receiptEl.appendChild(saveBtn);
+      }
+
+      function saveReceipt() {
+        html2canvas(receiptEl).then((canvas) => {
+          const link = document.createElement("a");
+          link.href = canvas.toDataURL("image/png");
+          link.download = "Gwen_Valentine_Receipt.png";
+          link.click();
+        });
+      }
+
+      nextBtn.onclick = nextQuestion;
+      backBtn.onclick = previousQuestion;
+      loadQuestion();
+    </script>
+  </body>
+</html>

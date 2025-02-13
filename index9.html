@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="tl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Espesyal na Pag-anyaya</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=Old+Standard+TT&display=swap"
+      rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        background-color: #ffebee;
+        font-family: "Old Standard TT", serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-image: url("https://www.transparenttextures.com/patterns/old-wall.png");
+      }
+
+      .slide {
+        display: none;
+        padding: 2rem;
+        max-width: 800px;
+        background: #fff0f5;
+        border: 10px solid #ff4081;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        border-radius: 15px;
+      }
+
+      .active-slide {
+        display: block;
+      }
+
+      h1, h2, h3 {
+        font-family: "Cinzel Decorative", cursive;
+        color: #d81b60;
+      }
+
+      .image-gallery {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 15px;
+        flex-wrap: wrap;
+      }
+
+      .image-gallery img {
+        width: 80px;
+        height: 80px;
+        border-radius: 10px;
+        cursor: pointer;
+        border: 2px solid #ff4081;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 10;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal img {
+        max-width: 90%;
+        max-height: 80%;
+        border-radius: 10px;
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        font-size: 30px;
+        color: white;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slides-container">
+      <div class="slide active-slide" data-slide="1">
+        <h2>Hi Gwen, enjoying the view of your photos here?</h2>
+        <div class="image-gallery">
+          <img src="https://via.placeholder.com/80" onclick="openModal(this)" />
+          <img src="https://via.placeholder.com/80" onclick="openModal(this)" />
+          <img src="https://via.placeholder.com/80" onclick="openModal(this)" />
+          <img src="https://via.placeholder.com/80" onclick="openModal(this)" />
+        </div>
+        <p>yeah i know, you’re not lol, sorryy. I know it’s kinda weird but could you please proceed?</p>
+        <button onclick="nextSlide()">Next ➔</button>
+      </div>
+    </div>
+
+    <div class="modal" id="imageModal">
+      <span class="modal-close" onclick="closeModal()">&times;</span>
+      <img id="modalImage" />
+    </div>
+
+    <script>
+      function openModal(img) {
+        document.getElementById("modalImage").src = img.src;
+        document.getElementById("imageModal").style.display = "flex";
+      }
+
+      function closeModal() {
+        document.getElementById("imageModal").style.display = "none";
+      }
+    </script>
+  </body>
+</html>

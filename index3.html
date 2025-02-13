@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Invite</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #ffebee;
+        }
+        .container {
+            width: 90%;
+            max-width: 400px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .slide {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        button {
+            background: #e91e63;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+        }
+        button:hover {
+            background: #c2185b;
+        }
+        .image-container img {
+            width: 100%;
+            max-width: 150px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .big-image {
+            width: 100%;
+            max-width: 300px;
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .receipt {
+            text-align: left;
+            background: white;
+            padding: 15px;
+            margin-top: 10px;
+            font-family: monospace;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="slide1" class="slide active">
+        <p>Hi G, enjoying the view of your photos here?</p>
+        <div class="image-container">
+            <img src="https://via.placeholder.com/150" alt="Placeholder">
+            <img src="https://via.placeholder.com/150" alt="Placeholder">
+            <img src="https://via.placeholder.com/150" alt="Placeholder">
+            <img src="https://via.placeholder.com/150" alt="Placeholder">
+        </div>
+        <button onclick="nextSlide()">Next</button>
+    </div>
+
+    <div id="slide2" class="slide">
+        <p>Actually, hindi ko alam itong ginagawa kong ito kahit nung umpisa pa lang...</p>
+        <button onclick="nextSlide()">Next</button>
+    </div>
+
+    <div id="slide3" class="slide">
+        <p>I know na ito'y kinagugulat mo din and biglaan...</p>
+        <button onclick="nextSlide()">OK, continue</button>
+    </div>
+
+    <div id="slide4" class="slide">
+        <p>Alam kong hindi naman tayo madalas nagkakausap...</p>
+        <img src="https://via.placeholder.com/150" alt="Lifegroup Leader">
+        <img src="https://via.placeholder.com/150" alt="Lifegroup Leader">
+        <button onclick="nextSlide()">Next na drama ko eh</button>
+    </div>
+
+    <div id="slide5" class="slide">
+        <p>Yeah, I built this app...</p>
+        <button onclick="nextSlide()">Yes</button>
+        <button id="noButton" onmouseover="moveNoButton()">No</button>
+    </div>
+
+    <div id="slide6" class="slide">
+        <p>Eto na malapit na...</p>
+        <img src="/mnt/data/image.png" alt="Event Poster" width="100%">
+        <p>Would you like to come?</p>
+        <button onclick="nextSlide()">Yes</button>
+    </div>
+
+    <div id="slide7" class="slide">
+        <p>Thank you Lord!, Cool! Located ang cafe sa Quezon City.</p>
+        <img src="https://via.placeholder.com/300" alt="Cafe Location">
+        <button onclick="nextSlide()">Next</button>
+    </div>
+
+    <div id="slide8" class="slide">
+        <p>Anong gusto mong kainin dito?</p>
+        <div class="image-container">
+            <img src="https://via.placeholder.com/100" onclick="enlargeImage(this)">
+            <img src="https://via.placeholder.com/100" onclick="enlargeImage(this)">
+        </div>
+        <input type="text" placeholder="Type your order here">
+        <button onclick="nextSlide()">Next</button>
+    </div>
+
+    <div id="slide9" class="slide">
+        <p>Drinks?</p>
+        <div class="image-container">
+            <img src="https://via.placeholder.com/100" onclick="enlargeImage(this)">
+            <img src="https://via.placeholder.com/100" onclick="enlargeImage(this)">
+        </div>
+        <button onclick="nextSlide()">Next</button>
+    </div>
+
+    <div id="slide10" class="slide">
+        <p>Ma'am Cash po ba or Card?</p>
+        <button onclick="nextSlide()">Joke! Continue</button>
+    </div>
+
+    <div id="slide11" class="slide">
+        <p>What time tayo aalis?</p>
+        <input type="time" id="timePicker">
+        <button onclick="nextSlide()">Next</button>
+    </div>
+
+    <div id="slide12" class="slide">
+        <p>Till what time ka lang?</p>
+        <input type="time" id="endTimePicker">
+        <button onclick="generateReceipt()">Check Receipt</button>
+    </div>
+
+    <div id="slide13" class="slide">
+        <p>Receipt:</p>
+        <div class="receipt" id="receiptText"></div>
+        <button onclick="saveReceipt()">Save Receipt</button>
+    </div>
+
+    <div id="slide14" class="slide">
+        <p>Send the screenshot to my Messenger, see you then!</p>
+        <button onclick="closeApp()">Close App</button>
+    </div>
+</div>
+
+<script>
+    let currentSlide = 1;
+    function nextSlide() {
+        document.getElementById("slide" + currentSlide).classList.remove("active");
+        currentSlide++;
+        document.getElementById("slide" + currentSlide).classList.add("active");
+    }
+
+    function moveNoButton() {
+        let btn = document.getElementById("noButton");
+        btn.style.position = "absolute";
+        btn.style.left = Math.random() * 300 + "px";
+        btn.style.top = Math.random() * 300 + "px";
+    }
+
+    function enlargeImage(img) {
+        let bigImg = document.createElement("img");
+        bigImg.src = img.src;
+        bigImg.className = "big-image";
+        bigImg.onclick = function() { this.remove(); };
+        document.body.appendChild(bigImg);
+    }
+
+    function generateReceipt() {
+        let time = document.getElementById("timePicker").value;
+        let endTime = document.getElementById("endTimePicker").value;
+        document.getElementById("receiptText").innerHTML = `Time: ${time} - ${endTime}`;
+        nextSlide();
+    }
+
+    function saveReceipt() {
+        window.print();
+    }
+
+    function closeApp() {
+        window.close();
+    }
+</script>
+
+</body>
+</html>
