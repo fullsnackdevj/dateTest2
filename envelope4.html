@@ -158,22 +158,13 @@
 
     <script>
         const letter = document.querySelector('.letter');
-
-        function openLetter(event) {
-            event.preventDefault(); // Prevents unwanted zooming on mobile
-
-            letter.style.transition = "transform 0.5s ease-out, opacity 0.5s ease-out";
-            letter.style.transform = "scale(3)"; // Prevent extreme scaling
-            letter.style.opacity = "0"; 
-
-            setTimeout(() => {
-                window.location.href = "invitation.html";
-            }, 500);
+    
+        function openLetter() {
+            window.location.href = "invitation.html"; // Redirect instantly
         }
-
-        // Attach event listeners for both mobile and desktop
+    
         letter.addEventListener('click', openLetter);
-        letter.addEventListener('touchstart', openLetter);
     </script>
+    
 </body>
 </html>
