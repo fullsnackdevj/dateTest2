@@ -410,6 +410,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
       </div>
     </div>
 
+
+    <audio id="bgMusic" loop>
+      <source src="./tugonBGM.mp3" type="audio/mpeg">
+      Your browser does not support the audio tag.
+  </audio>
+
     <script>
       let currentSlide = 1;
 const totalSlides = document.querySelectorAll(".slide").length;
@@ -587,7 +593,21 @@ window.onload = function () {
     }
 };
 
+// auto play tugon mp3
 
+document.addEventListener("DOMContentLoaded", function () {
+        const audio = document.getElementById("bgMusic");
+
+        // Try to play automatically
+        audio.play().catch(() => {
+            console.log("Autoplay blocked. Waiting for user interaction.");
+        });
+
+        // Optional: Start music on first user interaction (fixes autoplay restrictions)
+        document.body.addEventListener("click", () => {
+            audio.play();
+        }, { once: true }); // Runs only once
+    });
 
 
     </script>

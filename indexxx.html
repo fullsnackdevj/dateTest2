@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Invitation</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            flex-direction: column;
+        }
+        .envelope-container {
+            position: relative;
+            width: 200px;
+            cursor: pointer;
+        }
+        .envelope {
+            width: 100%;
+            transition: opacity 0.5s;
+        }
+        .letter {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 160px;
+            height: 100px;
+            background: white;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            overflow-y: auto;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            display: none;
+
+            /* Hide scrollbar but keep scrolling */
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE/Edge */
+        }
+        .letter::-webkit-scrollbar {
+            display: none; /* Chrome, Safari */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="envelope-container" onclick="openEnvelope()">
+        <img id="envelope" class="envelope" src="./img/closed-envelope.png" alt="Closed Envelope">
+        <div id="letter" class="letter">
+            <p>Dear [Name],</p>
+            <p>You are invited to a special event! Join me for a memorable day filled with fun, laughter, and great company.</p>
+            <p>📅 Date: February 14, 2025<br>📍 Location: Your favorite café<br>⏰ Time: 7:00 PM</p>
+            <p>Looking forward to seeing you there!</p>
+            <p>- Your Secret Admirer</p>
+        </div>
+    </div>
+
+    <script>
+        function openEnvelope() {
+            const envelope = document.getElementById("envelope");
+            const letter = document.getElementById("letter");
+
+            envelope.src = "./img/open-envelope.png"; // Change to open envelope image
+            letter.style.display = "block"; // Show the letter
+        }
+    </script>
+
+</body>
+</html>
