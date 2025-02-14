@@ -66,15 +66,15 @@
       }
 
       .receipt {
-  background: white;
-  padding: 2rem;
-  font-family: "Courier New", Courier, monospace;
-  border: 2px dashed #000;
-  text-align: left; /* Left-align text */
-  width: 300px;
-  margin: 0 auto;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+        background: white;
+        padding: 2rem;
+        font-family: "Courier New", Courier, monospace;
+        border: 2px dashed #000;
+        text-align: center;
+        width: 300px;
+        margin: 0 auto;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
       .receipt h3 {
         border-bottom: 1px dashed #000;
         padding-bottom: 10px;
@@ -335,50 +335,79 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
       <!-- Slide 7 -->
       <div class="slide" data-slide="7">
-        <h2>Yes!, Thank you Lord!...</h2>
+        <h2>Thank you Lord!, Cool! ...</h2>
         <p>
-          Ang name ng cafe is Our Humble Beginnings 001, sa 99-101, Topaz Building, Ground Floor, Kamias Rd, Quezon City. 
+          located ang cafe na ito sa Kamias, chineck nanamin ito ni ricknel
+          HAHA.
         </p>
         <button onclick="prevSlide()">⇠ Back</button>
         <button onclick="nextSlide()">Next ⇢</button>
       </div>
 
-   
-      <!-- <div class="slide" data-slide="8">
-        <h2>What time ka dapat nasa inyo na?</h2>
-        <input type="time" id="time-choice" />
-        <button onclick="prevSlide()">⇠ Back</button>
-        <button onclick="nextSlide()">Next ⇢</button>
-      </div> -->
-
+      <!-- Slide 8 -->
       <div class="slide" data-slide="8">
-        <h2>What time ka dapat nasa inyo na?</h2>
-        <input type="time" id="time-choice" />
+        <h2>Pili ka ng food mo.</h2>
+        <input
+          type="text"
+          id="food-choice"
+          placeholder="Halimbawa: Spaghetti" />
         <button onclick="prevSlide()">⇠ Back</button>
         <button onclick="nextSlide()">Next ⇢</button>
       </div>
 
       <!-- Slide 9 -->
       <div class="slide" data-slide="9">
-        <h2>Perfect! Isulat ko na sa resibo.</h2>
+        <h2>At ano naman ang gusto mong inumin?</h2>
+        <input
+          type="text"
+          id="drink-choice"
+          placeholder="Halimbawa: Iced Coffee" />
         <button onclick="prevSlide()">⇠ Back</button>
+        <button onclick="nextSlide()">Next ⇢</button>
+      </div>
+
+      <!-- Slide 10 -->
+      <div class="slide" data-slide="10">
+        <h2>Maam Cash po ba or Card?💰💳</h2>
+        <button onclick="prevSlide()">⇠ Back</button>
+        <button onclick="nextSlide()">😂 Joke lang!, Next ⇢</button>
+      </div>
+
+      <!-- Add this to Slide 11 or a new slide -->
+      <div class="slide" data-slide="11">
+        <h2>Anong petsa tayo aalis?</h2>
+        <input type="date" id="date-choice" data-placeholder="Select a date" />
+        <button onclick="prevSlide()">⇠ Back</button>
+        <button onclick="nextSlide()">Next ⇢</button>
+      </div>
+
+      <!-- Slide 12 -->
+      <div class="slide" data-slide="12">
+        <h2>What time ka dapat nasa inyo na?</h2>
+        <input type="time" id="time-choice" />
+        <button onclick="prevSlide()">⇠ Back</button>
+        <button onclick="nextSlide()">Next ⇢</button>
+      </div>
+
+      <!-- Slide 13 -->
+      <div class="slide" data-slide="13">
+        <h2>Perfect! Isulat ko na sa resibo.</h2>
+        <button onclick="prevSlide()">⬅ Back</button>
         <button onclick="nextSlide()">Next ➔</button>
       </div>
 
-    <!-- Slide 10 -->
-    <div class="slide" data-slide="10">
-      <h2>See you then! 😊</h2>
-      <p>Here's a summary of our plans:</p>
-      <div class="receipt">
-        <h3>Our Humble Beginnings 001</h3>
-        <p>Address: 99-101, Topaz Building, Ground Floor, Kamias Rd, Quezon City</p>
-        <hr>
-        <p><strong>When:</strong> February 16, 2025</p>
-        <p><strong>Who are you with:</strong> Jay</p>
-        <hr>
-        <p><strong>Total:</strong> Already Paid</p>
+      <!-- Add this as Slide 14 -->
+      <div class="slide" data-slide="14">
+        <h2>See you then! 😊</h2>
+        <p>Here's a summary of our plans:</p>
+        <ul>
+          <li>Date: <span id="summary-date"></span></li>
+          <li>Time: <span id="summary-time"></span></li>
+          <li>Food: <span id="summary-food"></span></li>
+          <li>Drink: <span id="summary-drink"></span></li>
+        </ul>
+        <button onclick="saveReceipt()">💾 I-save ang Resibo</button>
       </div>
-      <button onclick="saveReceipt()">💾 I-save ang Resibo</button>
     </div>
 
 
@@ -388,55 +417,23 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   </audio>
 
     <script>
-
-function convertTo12HourFormat(time24) {
-  if (!time24) return "N/A"; // Handle empty input
-
-  // Split the time into hours and minutes
-  const [hours, minutes] = time24.split(":");
-
-  // Convert hours to 12-hour format
-  let hours12 = parseInt(hours, 10);
-  const ampm = hours12 >= 12 ? "PM" : "AM";
-  hours12 = hours12 % 12 || 12; // Convert 0 to 12 for 12-hour format
-
-  // Return the formatted time
-  return `${hours12}:${minutes} ${ampm}`;
-}
-
-      // fade in background
-
-document.addEventListener("DOMContentLoaded", function () {
-    const overlay = document.createElement("div");
-    overlay.style.position = "fixed";
-    overlay.style.top = "0";
-    overlay.style.left = "0";
-    overlay.style.width = "100%";
-    overlay.style.height = "100%";
-    overlay.style.backgroundColor = "white";
-    overlay.style.zIndex = "9999";
-    overlay.style.opacity = "1";
-    overlay.style.transition = "opacity 1.5s ease";
-    document.body.appendChild(overlay);
-
-    setTimeout(() => {
-        overlay.style.opacity = "0";
-        setTimeout(() => {
-            document.body.removeChild(overlay);
-        }, 1500); // Match the fade-out duration
-    }, 500); // Delay before fade-out starts
-});
-
-
-
-// sliders
-
-
       let currentSlide = 1;
 const totalSlides = document.querySelectorAll(".slide").length;
 
 function nextSlide() {
-  if (currentSlide === 8 && !document.getElementById("time-choice").value) {
+  if (currentSlide === 8 && !document.getElementById("food-choice").value) {
+    alert("Please enter your food choice!");
+    return;
+  }
+  if (currentSlide === 9 && !document.getElementById("drink-choice").value) {
+    alert("Please enter your drink choice!");
+    return;
+  }
+  if (currentSlide === 11 && !document.getElementById("date-choice").value) {
+    alert("Please select a date!");
+    return;
+  }
+  if (currentSlide === 12 && !document.getElementById("time-choice").value) {
     alert("Please select a time!");
     return;
   }
@@ -450,11 +447,7 @@ function nextSlide() {
       .querySelector(`[data-slide="${currentSlide}"]`)
       .classList.add("active-slide");
   }
-
-  // Update the receipt when navigating to Slide 10
-  if (currentSlide === 10) {
-    updateReceipt();
-  }
+  updateReceipt();
 }
 
 function prevSlide() {
@@ -475,27 +468,21 @@ function moveButton(btn) {
   btn.style.transform = `translate(${x}px, ${y}px)`;
 }
 
-// function updateReceipt() {
-//   const time = document.getElementById("time-choice").value;
-//   const summaryTimeElement = document.getElementById("summary-time");
-
-//   if (summaryTimeElement) {
-//     summaryTimeElement.innerText = time || "N/A";
-//   }
-// }
-
 function updateReceipt() {
-  const time24 = document.getElementById("time-choice").value;
-  const time12 = convertTo12HourFormat(time24); // Convert to 12-hour format
-  const summaryTimeElement = document.getElementById("summary-time");
+  const date = document.getElementById("date-choice").value;
+  const time = document.getElementById("time-choice").value;
+  const food = document.getElementById("food-choice").value;
+  const drink = document.getElementById("drink-choice").value;
 
-  if (summaryTimeElement) {
-    summaryTimeElement.innerText = time12; // Display in 12-hour format
-  }
+  document.getElementById("summary-date").innerText = date || "N/A";
+  document.getElementById("summary-time").innerText = time || "N/A";
+  document.getElementById("summary-food").innerText = food || "N/A";
+  document.getElementById("summary-drink").innerText = drink || "N/A";
 }
 
-
 // function saveReceipt() {
+//   updateReceipt(); // Ensure the receipt is updated with the latest data
+
 //   // Create a temporary receipt container
 //   const receiptContainer = document.createElement("div");
 //   receiptContainer.classList.add("receipt");
@@ -506,45 +493,33 @@ function updateReceipt() {
 //   receiptContainer.style.padding = "20px";
 //   receiptContainer.style.border = "2px solid black";
 //   receiptContainer.style.width = "300px";
-//   receiptContainer.style.textAlign = "left"; // Left-align text
 
-
-//   // Populate the receipt content
 //   receiptContainer.innerHTML = `
-//     <h3>Our Humble Beginnings 001</h3>
-//     <p>Address: 99-101, Topaz Building, Ground Floor, Kamias Rd, Quezon City</p>
-//     <hr>
-//     <p><strong>When:</strong> February 16, 2025</p>
-//     <p><strong>Available until:</strong> ${document.getElementById("time-choice").value}</p>
-//     <p><strong>Who are you with:</strong> Jay</p>
-//     <hr>
-//     <p><strong>Total:</strong> Already Paid</p>
+//     <h3>Receipt</h3>
+//     <p>Date: <span id="receipt-date">${document.getElementById("date-choice").value}</span></p>
+//     <p>Time: <span id="receipt-time">${document.getElementById("time-choice").value}</span></p>
+//     <p>Food: <span id="receipt-food">${document.getElementById("food-choice").value}</span></p>
+//     <p>Drink: <span id="receipt-drink">${document.getElementById("drink-choice").value}</span></p>
 //   `;
 
-
-//   // Append the receipt container to the body
 //   document.body.appendChild(receiptContainer);
 
-//   // Use html2canvas to capture the receipt as an image
-//   html2canvas(receiptContainer).then((canvas) => {
-//     // Create a temporary link element
-//     const link = document.createElement("a");
-//     link.download = "resibo_ni_gwen.png"; // File name
-//     link.href = canvas.toDataURL(); // Convert canvas to image URL
-//     link.click(); // Trigger the download
+//   setTimeout(() => {
+//     html2canvas(receiptContainer).then((canvas) => {
+//       const link = document.createElement("a");
+//       link.download = "resibo_ni_gwen.png";
+//       link.href = canvas.toDataURL();
+//       link.click();
 
-//     // Clean up: Remove the temporary receipt container
-//     document.body.removeChild(receiptContainer);
-//   }).catch((error) => {
-//     console.error("Error generating receipt:", error);
-//     alert("Failed to save receipt. Please try again.");
-//   });
+//       // Clean up
+//       document.body.removeChild(receiptContainer);
+//     });
+//   }, 300);
 // }
 
 
 function saveReceipt() {
-  const time24 = document.getElementById("time-choice").value;
-  const time12 = convertTo12HourFormat(time24); // Convert to 12-hour format
+  updateReceipt(); // Ensure the receipt is updated with the latest data
 
   // Create a temporary receipt container
   const receiptContainer = document.createElement("div");
@@ -556,39 +531,32 @@ function saveReceipt() {
   receiptContainer.style.padding = "20px";
   receiptContainer.style.border = "2px solid black";
   receiptContainer.style.width = "300px";
-  receiptContainer.style.textAlign = "left"; // Left-align text
 
-  // Populate the receipt content
   receiptContainer.innerHTML = `
     <h3>Our Humble Beginnings 001</h3>
     <p>Address: 99-101, Topaz Building, Ground Floor, Kamias Rd, Quezon City</p>
     <hr>
     <p><strong>When:</strong> February 16, 2025</p>
-    <p><strong>Available until:</strong> ${time12}</p> <!-- Use 12-hour format -->
+    <p><strong>Available until:</strong> ${document.getElementById("time-choice").value}</p>
     <p><strong>Who are you with:</strong> Jay</p>
     <hr>
     <p><strong>Total:</strong> Already Paid</p>
   `;
 
-  // Append the receipt container to the body
   document.body.appendChild(receiptContainer);
 
-  // Use html2canvas to capture the receipt as an image
-  html2canvas(receiptContainer).then((canvas) => {
-    // Create a temporary link element
-    const link = document.createElement("a");
-    link.download = "resibo_ni_gwen.png"; // File name
-    link.href = canvas.toDataURL(); // Convert canvas to image URL
-    link.click(); // Trigger the download
+  setTimeout(() => {
+    html2canvas(receiptContainer).then((canvas) => {
+      const link = document.createElement("a");
+      link.download = "resibo_ni_gwen.png";
+      link.href = canvas.toDataURL();
+      link.click();
 
-    // Clean up: Remove the temporary receipt container
-    document.body.removeChild(receiptContainer);
-  }).catch((error) => {
-    console.error("Error generating receipt:", error);
-    alert("Failed to save receipt. Please try again.");
-  });
+      // Clean up
+      document.body.removeChild(receiptContainer);
+    });
+  }, 300);
 }
-
 
 function openModal(img) {
         document.getElementById("modalImage").src = img.src;
@@ -598,6 +566,51 @@ function openModal(img) {
       function closeModal() {
         document.getElementById("imageModal").style.display = "none";
       }
+
+// text srambler
+// document.addEventListener("DOMContentLoaded", () => {
+//     const elements = document.querySelectorAll("body *:not(script, style, noscript)");
+    
+//     elements.forEach(el => {
+//         if (el.childNodes.length === 1 && el.childNodes[0].nodeType === 3) { // Ensures only text nodes are affected
+//             let originalText = el.innerText;
+//             el.dataset.original = originalText;
+            
+//             function scrambleText(text) {
+//                 const upperChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+//                 const lowerChars = "abcdefghijklmnopqrstuvwxyz";
+                
+//                 return text.split('').map(char => {
+//                     if (char.match(/[A-Z]/)) {
+//                         return upperChars[Math.floor(Math.random() * upperChars.length)];
+//                     } else if (char.match(/[a-z]/)) {
+//                         return lowerChars[Math.floor(Math.random() * lowerChars.length)];
+//                     } else {
+//                         return char; // Keep spaces and symbols unchanged
+//                     }
+//                 }).join('');
+//             }
+            
+//             function restoreText() {
+//                 el.innerText = originalText;
+//             }
+            
+//             function rescrambleText() {
+//                 el.innerText = scrambleText(originalText);
+//             }
+            
+//             el.innerText = scrambleText(originalText);
+//             el.addEventListener("mouseenter", restoreText);
+//             el.addEventListener("mouseleave", rescrambleText);
+//             el.addEventListener("touchstart", restoreText, { passive: true });
+//             el.addEventListener("touchend", rescrambleText, { passive: true });
+//         }
+//     });
+// });
+
+document.querySelectorAll("p").forEach(p => {
+    p.innerHTML = p.textContent.replace(/(^\s*\w|[.!?]\s*\w)/g, match => match.toUpperCase());
+});
 
 
 // open in browser functionality

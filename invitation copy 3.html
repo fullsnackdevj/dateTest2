@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="tl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Espesyal na Pag-anyaya</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=Old+Standard+TT&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        background-color: #ffebee;
+        font-family: "Old Standard TT", serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-image: url("https://www.transparenttextures.com/patterns/old-wall.png");
+      }
+
+      .slide {
+        display: none;
+        padding: 2rem;
+        max-width: 800px;
+        background: #fff0f5;
+        border: 10px solid #ff408187;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        border-radius: 15px;
+      }
+
+      .active-slide {
+        display: block;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: "Cinzel Decorative", cursive;
+        color: #d81b60;
+      }
+
+      button {
+        padding: 12px 25px;
+        background-color: #ff4081;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 10px;
+        margin: 10px;
+        transition: 0.3s;
+      }
+
+      button:hover {
+        background-color: #c2185b;
+      }
+
+      .evade-btn {
+        position: absolute;
+        transition: all 0.3s ease;
+      }
+
+      .receipt {
+        background: white;
+        padding: 2rem;
+        font-family: "Courier New", Courier, monospace;
+        border: 2px dashed #000;
+        text-align: left;
+        width: 300px;
+        margin: 0 auto;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .receipt h3 {
+        border-bottom: 1px dashed #000;
+        padding-bottom: 10px;
+      }
+
+      .receipt p {
+        margin: 10px 0;
+      }
+
+      .image-gallery {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 15px;
+        flex-wrap: wrap;
+      }
+
+      .image-gallery img {
+        width: 80px;
+        display: flex;
+        height: 80px;
+        border-radius: 10px;
+        cursor: pointer;
+        border: 2px solid #ff4081;
+        flex-wrap: wrap;
+        object-fit: cover;
+        animation: shake 0.5s infinite alternate ease-in-out;
+      }
+
+      @keyframes shake {
+        0% {
+          transform: translate(0, 0);
+        }
+        25% {
+          transform: translate(-0.5px, 0.5px);
+        }
+        50% {
+          transform: translate(0.5px, -0.5px);
+        }
+        75% {
+          transform: translate(-0.5px, -0.5px);
+        }
+        100% {
+          transform: translate(0, 0);
+        }
+      }
+
+      .image-gallery img:nth-child(1) {
+        animation-delay: 0s;
+      }
+      .image-gallery img:nth-child(2) {
+        animation-delay: 1.5s;
+      }
+      .image-gallery img:nth-child(3) {
+        animation-delay: 3s;
+      }
+      .image-gallery img:nth-child(4) {
+        animation-delay: 4.5s;
+      }
+      .image-gallery img:nth-child(5) {
+        animation-delay: 6s;
+      }
+      .image-gallery img:nth-child(6) {
+        animation-delay: 7.5s;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 10;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal img {
+        max-width: 90%;
+        max-height: 80%;
+        border-radius: 10px;
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        font-size: 30px;
+        color: white;
+        cursor: pointer;
+      }
+
+      input[type="date"] {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        display: block;
+        width: 100%;
+        max-width: 250px;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: white;
+        color: #333;
+        text-transform: uppercase;
+        position: relative;
+      }
+
+      input[type="date"]::before {
+        content: attr(data-placeholder);
+        width: 100%;
+        color: #999;
+      }
+
+      input[type="date"]:valid::before {
+        content: "";
+      }
+
+      input[type="date"]::-webkit-calendar-picker-indicator {
+        opacity: 1;
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        background: url("https://cdn-icons-png.flaticon.com/512/747/747310.png")
+          no-repeat center;
+        background-size: contain;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="modal" id="imageModal">
+      <span class="modal-close" onclick="closeModal()">&times;</span>
+      <img id="modalImage" />
+    </div>
+
+    <div class="slides-container">
+      <!-- Slide 1 -->
+      <div class="slide active-slide" data-slide="1">
+        <h2>Hi Gwen, enjoying the view of your photos here?</h2>
+
+        <div class="image-gallery">
+          <img src="./img/g1.jpg" onclick="openModal(this)" />
+          <img src="./img/g2.jpg" onclick="openModal(this)" />
+          <img src="./img/g3.jpg" onclick="openModal(this)" />
+          <img src="./img/g4.jpg" onclick="openModal(this)" />
+          <img src="./img/g2.jpg" onclick="openModal(this)" />
+          <img src="./img/g1.jpg" onclick="openModal(this)" />
+        </div>
+
+        <p>
+          yeah i know , youre not lol, sorryy. I know its kinda weird but could
+          you please proceed?
+        </p>
+        <button onclick="nextSlide()">Next ➔</button>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="slide" data-slide="2">
+        <h2>
+          Actually, hindi ko alam itong ginagawa kong ito kahit nung umpisa
+          palang...
+        </h2>
+        <p>
+          but i really pray this to the Lord and i believe na sya din nag
+          impress na gawin ko ang mga ito.
+        </p>
+        <button onclick="prevSlide()">⇠ Back</button>
+        <button onclick="nextSlide()">Next ⇢</button>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="slide" data-slide="3">
+        <h2>I know na itoy kinagugulat mo din and biglaan...</h2>
+        <p>
+          but i just really want na maipakita sayo na clear and tunay ang
+          intensyon ko sa ginagawa kong ito. sana tapusin mo hanggang dulo.
+        </p>
+        <button onclick="prevSlide()">⇠ Back</button>
+        <button onclick="nextSlide()">Ok, Continue ⇢</button>
+      </div>
+
+      <!-- Slide 4 -->
+      <div class="slide" data-slide="4">
+        <h2>Alam kong hndi naman tayo madalas nagkakausap...</h2>
+        <p>
+          very casual lang tayo na magkakilala, kaya siguro weird talaga itong
+          mga ito sayo. Tinuruan ako ng Lord, na hindi magbibigay, magpapakita ng interest, at
+          motibo sa babae if wala akong balak na ipursue at kung hindi naman
+          inilalagay ng Lord sa puso ko.
+        </p>
+        <button onclick="prevSlide()">⇠ Back</button>
+        <button onclick="nextSlide()">Next na, drama mo eh ⇢</button>
+      </div>
+
+      <!-- Slide 5 -->
+      <div class="slide" data-slide="5">
+        <h2>Yeah, I built this app, from day 1 to this day, para sayo...</h2>
+        <p>
+          dhil pinagpray koto sa Lord na magkaroon ako ng unique and sariling
+          way na may touch ng passion ko and at the same time makita mo ang
+          sincerity ko sa feelings ko sayo. ' resume ' ang isinuggest ng nanay
+          mo sakin' thanks din sa kanya nagkaroon ako ng sariling idea khit
+          hindi sya actually na resume 😂
+        </p>
+        <button onclick="prevSlide()">⇠ Back</button>
+        <button onclick="nextSlide()">Haha! Ok, Next ⇢</button>
+      </div>
+
+      <!-- Slide 6 -->
+      <div class="slide" data-slide="6">
+        <h2>Eto na malapit na, matatapos na please bear with me...</h2>
+        <p>
+          honestly, gusto kitang makausap and i would like to invite you to a
+          cafe. I bought 2 tickets for us, would you like to come?
+        </p>
+        <button class="yes-btn" onclick="nextSlide()">Yes! 😊</button>
+        <button class="evade-btn" onmouseover="moveButton(this)">No!</button>
+      </div>
+
+      <!-- Slide 7 -->
+      <div class="slide" data-slide="7">
+        <h2>Yes!, Thank you Lord!...</h2>
+        <p>
+          Ang name ng cafe is Our Humble Beginnings 001, sa 99-101, Topaz Building, Ground Floor, Kamias Rd, Quezon City.
+        </p>
+        <button onclick="prevSlide()">⇠ Back</button>
+        <button onclick="nextSlide()">Next ⇢</button>
+      </div>
+
+      <!-- Slide 8 -->
+      <div class="slide" data-slide="8">
+        <h2>What time ka dapat nasa inyo na?</h2>
+        <input type="time" id="time-choice" />
+        <button onclick="prevSlide()">⇠ Back</button>
+        <button onclick="nextSlide()">Next ⇢</button>
+      </div>
+
+      <!-- Slide 9 -->
+      <div class="slide" data-slide="9">
+        <h2>Perfect! Isulat ko na sa resibo.</h2>
+        <button onclick="prevSlide()">⇠ Back</button>
+        <button onclick="nextSlide()">Next ➔</button>
+      </div>
+
+      <!-- Slide 10 -->
+      <div class="slide" data-slide="10">
+        <h2>See you then! 😊</h2>
+        <p>Here's a summary of our plans:</p>
+        <div class="receipt">
+          <h3>Our Humble Beginnings 001</h3>
+          <p>Address: 99-101, Topaz Building, Ground Floor, Kamias Rd, Quezon City</p>
+          <hr>
+          <p><strong>When:</strong> February 16, 2025</p>
+          <p><strong>Who are you with:</strong> Jay</p>
+          <hr>
+          <p><strong>Total:</strong> Already Paid</p>
+        </div>
+        <button onclick="saveReceipt()">💾 I-save ang Resibo</button>
+      </div>
+    </div>
+
+    <audio id="bgMusic" loop>
+      <source src="./tugonBGM.mp3" type="audio/mpeg" />
+      Your browser does not support the audio tag.
+    </audio>
+
+    <script>
+      let currentSlide = 1;
+      const totalSlides = document.querySelectorAll(".slide").length;
+
+      function nextSlide() {
+        if (currentSlide === 8 && !document.getElementById("time-choice").value) {
+          alert("Please select a time!");
+          return;
+        }
+
+        document
+          .querySelector(`[data-slide="${currentSlide}"]`)
+          .classList.remove("active-slide");
+        currentSlide++;
+        if (currentSlide <= totalSlides) {
+          document
+            .querySelector(`[data-slide="${currentSlide}"]`)
+            .classList.add("active-slide");
+        }
+
+        // Update the receipt when navigating to Slide 10
+        if (currentSlide === 10) {
+          updateReceipt();
+        }
+      }
+
+      function prevSlide() {
+        if (currentSlide > 1) {
+          document
+            .querySelector(`[data-slide="${currentSlide}"]`)
+            .classList.remove("active-slide");
+          currentSlide--;
+          document
+            .querySelector(`[data-slide="${currentSlide}"]`)
+            .classList.add("active-slide");
+        }
+      }
+
+      function moveButton(btn) {
+        const x = (Math.random() - 0.5) * 200;
+        const y = (Math.random() - 0.5) * 200;
+        btn.style.transform = `translate(${x}px, ${y}px)`;
+      }
+
+      function updateReceipt() {
+        const time = document.getElementById("time-choice").value;
+        const summaryTimeElement = document.getElementById("summary-time");
+
+        if (summaryTimeElement) {
+          summaryTimeElement.innerText = time || "N/A";
+        }
+      }
+
+      function saveReceipt() {
+        // Create a temporary receipt container
+        const receiptContainer = document.createElement("div");
+        receiptContainer.classList.add("receipt");
+        receiptContainer.style.position = "fixed";
+        receiptContainer.style.top = "-9999px"; // Hide it off-screen
+        receiptContainer.style.left = "-9999px"; // Hide it off-screen
+        receiptContainer.style.background = "#fff";
+        receiptContainer.style.padding = "20px";
+        receiptContainer.style.border = "2px solid black";
+        receiptContainer.style.width = "300px";
+        receiptContainer.style.textAlign = "left"; // Left-align text
+
+        // Populate the receipt content
+        receiptContainer.innerHTML = `
+          <h3>Our Humble Beginnings 001</h3>
+          <p>Address: 99-101, Topaz Building, Ground Floor, Kamias Rd, Quezon City</p>
+          <hr>
+          <p><strong>When:</strong> February 16, 2025</p>
+          <p><strong>Who are you with:</strong> Jay</p>
+          <hr>
+          <p><strong>Total:</strong> Already Paid</p>
+        `;
+
+        // Append the receipt container to the body
+        document.body.appendChild(receiptContainer);
+
+        // Use html2canvas to capture the receipt as an image
+        html2canvas(receiptContainer).then((canvas) => {
+          // Create a temporary link element
+          const link = document.createElement("a");
+          link.download = "resibo_ni_gwen.png"; // File name
+          link.href = canvas.toDataURL(); // Convert canvas to image URL
+          link.click(); // Trigger the download
+
+          // Clean up: Remove the temporary receipt container
+          document.body.removeChild(receiptContainer);
+        }).catch((error) => {
+          console.error("Error generating receipt:", error);
+          alert("Failed to save receipt. Please try again.");
+        });
+      }
+
+      function openModal(img) {
+        document.getElementById("modalImage").src = img.src;
+        document.getElementById("imageModal").style.display = "flex";
+      }
+
+      function closeModal() {
+        document.getElementById("imageModal").style.display = "none";
+      }
+
+      document.querySelectorAll("p").forEach((p) => {
+        p.innerHTML = p.textContent.replace(/(^\s*\w|[.!?]\s*\w)/g, (match) =>
+          match.toUpperCase()
+        );
+      });
+
+      // Auto-play background music
+      document.addEventListener("DOMContentLoaded", function () {
+        const audio = document.getElementById("bgMusic");
+
+        // Try to play automatically
+        audio.play().catch(() => {
+          console.log("Autoplay blocked. Waiting for user interaction.");
+        });
+
+        // Optional: Start music on first user interaction (fixes autoplay restrictions)
+        document.body.addEventListener(
+          "click",
+          () => {
+            audio.play();
+          },
+          { once: true }
+        );
+      });
+    </script>
+  </body>
+</html>
