@@ -13,7 +13,7 @@
             flex-direction: column;
             /* background-color: #f8f9fa; */
             background: url('./img/heartAnimatedBG.gif') repeat;
-            background-size: 100px 100px; /* Adjust the size of each tile */
+            background-size: 100px 100px; /*Adjust the size of each tile */
         }
         .progress-container {
             position: relative;
@@ -60,9 +60,26 @@
         .heart-btn:active {
             transform: scale(1.2); /* Heartbeat effect */
         }
+
+        .message-text {
+            font-size: 16px;
+    text-align: center;
+    color: #e468db;
+    margin-top: 10px;
+    transition: opacity 0.3sease-in-out;
+    /* background: #fff1ff; */
+    padding: 1rem;
+    border-radius: 4px;
+    width: 300px;
+}
+
     </style>
 </head>
 <body>
+
+    <p class="message-text"></p> <!-- Ensure this exists in your HTML -->
+
+
 <div class="progress-wrapper">
     <div class="progress-container">
         <div class="progress-bar"></div>
@@ -80,35 +97,95 @@
 </audio>
 
 <script>
-    const puzzlePiece = document.querySelector('.puzzle-piece');
-    const heartBtn = document.querySelector('.heart-btn');
-    const progressBar = document.querySelector('.progress-bar');
-    const heartbeatSound = document.getElementById('heartbeatSound'); // Get the audio element
+    // const puzzlePiece = document.querySelector('.puzzle-piece');
+    // const heartBtn = document.querySelector('.heart-btn');
+    // const progressBar = document.querySelector('.progress-bar');
+    // const heartbeatSound = document.getElementById('heartbeatSound'); // Get the audio element
 
-    let progress = 0;
-    const step = 19; // Slower movement per click
-    const maxProgress = 250; // Limit for full progress
-    const maxWidth = 300; // Progress bar width
+    // let progress = 0;
+    // const step = 19; // Slower movement per click
+    // const maxProgress = 250; // Limit for full progress
+    // const maxWidth = 300; // Progress bar width
 
-    heartBtn.addEventListener('click', () => {
-        if (progress < maxProgress) {
-            progress += step;
-            puzzlePiece.style.left = `${progress}px`;
-            progressBar.style.width = `${(progress / maxProgress) * maxWidth}px`; // Update bar color following image
+    // heartBtn.addEventListener('click', () => {
+    //     if (progress < maxProgress) {
+    //         progress += step;
+    //         puzzlePiece.style.left = `${progress}px`;
+    //         progressBar.style.width = `${(progress / maxProgress) * maxWidth}px`; // Update bar color following image
 
-            // Play heartbeat sound
-            heartbeatSound.currentTime = 0; // Reset to start for multiple clicks
-            heartbeatSound.play();
+    //         // Play heartbeat sound
+    //         heartbeatSound.currentTime = 0; // Reset to start for multiple clicks
+    //         heartbeatSound.play();
 
-            // Enlarge heart animation
-            heartBtn.style.transform = 'scale(1.3)';
-            setTimeout(() => {
-                heartBtn.style.transform = 'scale(1)';
-            }, 200);
-        } else {
-            window.location.href = "envelope4.html"; // Redirect when finished
+    //         // Enlarge heart animation
+    //         heartBtn.style.transform = 'scale(1.3)';
+    //         setTimeout(() => {
+    //             heartBtn.style.transform = 'scale(1)';
+    //         }, 200);
+    //     } else {
+    //         window.location.href = "envelope4.html"; // Redirect when finished
+    //     }
+    // });
+
+
+
+const puzzlePiece = document.querySelector('.puzzle-piece');
+const heartBtn = document.querySelector('.heart-btn');
+const progressBar = document.querySelector('.progress-bar');
+const heartbeatSound = document.getElementById('heartbeatSound');
+const messageText = document.querySelector('.message-text'); // Added text element
+
+let progress = 0;
+const step = 20;
+const maxProgress = 250;
+const maxWidth = 300;
+
+const messages = [
+    "Click mo pa gwen ❤️",
+    "Dahan-dahan lang ha, ingatan mo ang puso mo.. ❤️",
+    "Gwen may bayad ‘to ah… may kapalit! Joke! 😏",
+    "Pindot ka nang pindot… sige pa konti nalang! 😆",
+    "Konti pa gwen… progress is real! 😍",
+    "Konti na lang… handa na ako maghintay.. ❤️",
+    "Tuloy-tuloy lang… 💘"
+];
+
+heartBtn.addEventListener('click', () => {
+    if (progress < maxProgress) {
+        progress += step;
+        puzzlePiece.style.left = `${progress}px`;
+        progressBar.style.width = `${(progress / maxProgress) * maxWidth}px`;
+
+        // Play heartbeat sound
+        heartbeatSound.currentTime = 0;
+        heartbeatSound.play();
+
+        // Enlarge heart animation
+        heartBtn.style.transform = 'scale(1.3)';
+        setTimeout(() => {
+            heartBtn.style.transform = 'scale(1)';
+        }, 200);
+
+        // Change background on first click
+        if (!messageText.style.background) {
+            messageText.style.background = "#fff1ff";
+            messageText.style.padding = "10px";  // Optional: Add padding to look nice
+            messageText.style.borderRadius = "10px"; // Optional: Smooth edges
         }
-    });
+
+        // Show random funny message
+        if (progress >= maxProgress - (step * 1)) {
+            messageText.textContent = progress >= maxProgress - step 
+                ? "Dalawang pindot na lang… ayan naaaa.. ❤️"
+                : "Dahan-dahan lang ha, ingatan mo ang puso mo.. ❤️";
+        } else {
+            messageText.textContent = messages[Math.floor(Math.random() * messages.length)];
+        }
+    } else {
+        window.location.href = "envelope4.html"; // Redirect when finished
+    }
+});
+
 
 
 

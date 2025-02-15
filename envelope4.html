@@ -156,11 +156,27 @@
         <div class="shadow"></div>
     </div>
 
+    <audio id="openSound" src="./WHOOSH.mp3"></audio>
+
     <script>
         const letter = document.querySelector('.letter');
+        const openSound = document.getElementById('openSound');
+    
+        // Play sound immediately when the page loads
+        window.addEventListener('load', () => {
+            openSound.play().catch(error => console.log("Autoplay blocked:", error));
+        });
     
         function openLetter() {
-            window.location.href = "invitation.html"; // Redirect instantly
+            // Play the sound
+            openSound.play();
+    
+            // Stop the sound after 1 second
+            setTimeout(() => {
+                openSound.pause();
+                openSound.currentTime = 0;
+                window.location.href = "invitation.html"; // Redirect after sound stops
+            }, 1000);
         }
     
         // Attach event listeners for both mobile and desktop
@@ -181,6 +197,8 @@
             }
         });
     </script>
+    
+
     
     
 </body>
