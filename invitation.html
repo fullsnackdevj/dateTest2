@@ -236,6 +236,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   background-size: contain;
 }
 
+input#time-choice {
+    display: block;
+    margin: 0 auto;
+    padding: .3rem 1rem;
+    margin-bottom: 1rem;
+}
+
 
 
 
@@ -259,13 +266,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
           <img src="./img/g2.jpg" onclick="openModal(this)" />
           <img src="./img/g3.jpg" onclick="openModal(this)" />
           <img src="./img/g4.jpg" onclick="openModal(this)" />
-          <img src="./img/g2.jpg" onclick="openModal(this)" />
-          <img src="./img/g1.jpg" onclick="openModal(this)" />
+          <img src="./img/g5.jpg" onclick="openModal(this)" />
         </div>
 
         <p>
-          yeah i know , youre not lol, sorryy. I know its kinda weird but could
-          you please proceed?
+          Yeah, I know you're not, lol. Sorry! I know it's kinda weird, but could you please proceed?
         </p>
         <button onclick="nextSlide()">Next ➔</button>
       </div>
@@ -273,12 +278,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
       <!-- Slide 2 -->
       <div class="slide" data-slide="2">
         <h2>
-          Actually, hindi ko alam itong ginagawa kong ito kahit nung umpisa
-          palang...
+          Sa totoo lang gwen, di ko alam if sa paanong way kita kakausapin..
         </h2>
         <p>
-          but i really pray this to the Lord and i believe na sya din nag
-          impress na gawin ko ang mga ito.
+          But I really prayed about this to the Lord, and I believe He is the one who impressed it upon my heart to do these things.
         </p>
         <button onclick="prevSlide()">⇠ Back</button>
         <button onclick="nextSlide()">Next ⇢</button>
@@ -286,73 +289,72 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
       <!-- Slide 3 -->
       <div class="slide" data-slide="3">
-        <h2>I know na itoy kinagugulat mo din and biglaan...</h2>
+        <h2>Nagulat ba kita? I know na sobrang weird neto sayo...</h2>
         <p>
-          but i just really want na maipakita sayo na clear and tunay ang
-          intensyon ko sa ginagawa kong ito. sana tapusin mo hanggang dulo.
+          But I just really want to show you that my intentions in doing this are clear and genuine. I hope you finish it until the end.
         </p>
         <button onclick="prevSlide()">⇠ Back</button>
-        <button onclick="nextSlide()">Ok, Continue ⇢</button>
+        <button onclick="nextSlide()">Next ⇢</button>
       </div>
 
       <!-- Slide 4 -->
       <div class="slide" data-slide="4">
-        <h2>Alam kong hndi naman tayo madalas nagkakausap...</h2>
+        <h2>Una sa lahat alam kong hndi naman tayo madalas nagkakausap...</h2>
         <p>
-          very casual lang tayo na magkakilala, kaya siguro weird talaga itong
-          mga ito sayo. Tinuruan ako ng Lord, na hindi magbibigay, magpapakita ng interest, at
-          motibo sa babae if wala akong balak na ipursue at kung hindi naman
-          inilalagay ng Lord sa puso ko.
+          Very casual lang tayo na magkakilala at nag-uusap, kaya siguro weird talaga itong
+          mga ito sayo. The Lord taught me not to give, show interest, or have intentions toward a woman if I have no plans to pursue her and if He hasn’t placed it in my heart.
         </p>
         <button onclick="prevSlide()">⇠ Back</button>
-        <button onclick="nextSlide()">Next na, drama mo eh ⇢</button>
+        <button onclick="nextSlide()">Next ⇢</button>
       </div>
 
       <!-- Slide 5 -->
       <div class="slide" data-slide="5">
-        <h2>Yeah, I built this app, from day 1 to this day, para sayo...</h2>
+        <h2>Yeah, Di ko na alam gwen, Korny ba itong way nato? ...</h2>
         <p>
-          dhil pinagpray koto sa Lord na magkaroon ako ng unique and sariling
-          way na may touch ng passion ko and at the same time makita mo ang
-          sincerity ko sa feelings ko sayo. ' resume ' ang isinuggest ng nanay
+          Because I prayed to the Lord for a unique and personal way—one that reflects my passion and, at the same time, allows you to see the sincerity of my feelings for you.' resume ' ang isinuggest ng nanay
           mo sakin' thanks din sa kanya nagkaroon ako ng sariling idea khit
           hindi sya actually na resume 😂
         </p>
         <button onclick="prevSlide()">⇠ Back</button>
-        <button onclick="nextSlide()">Haha! Ok, Next ⇢</button>
+        <button onclick="nextSlide()">Next ⇢</button>
       </div>
 
       <!-- Slide 6 -->
       <div class="slide" data-slide="6">
-        <h2>Eto na malapit na, matatapos na please bear with me...</h2>
+        <h2>Gwen, sa totoo lang gusto kitang ayain lumabas ngayon..</h2>
         <p>
-          honestly, gusto kitang makausap and i would like to invite you to a
-          cafe. I bought 2 tickets for us, would you like to come?
+          Sa mga oras na binabasa mo ito, nasa cafe na ako ngayon, ikaw nalang ang hinihintay ko dito..
+          Sana mabigyan mo ng chance na makausap ka ngayon.. May I have the honor of taking you out on a date? 😊💕
         </p>
-        <button class="yes-btn" onclick="nextSlide()">Yes! 😊</button>
-        <button class="evade-btn" onmouseover="moveButton(this)">No!</button>
+        <!-- <button class="yes-btn" onclick="nextSlide()">Yes!😊</button> -->
+        <button class="yes-btn" onclick="playSound(); nextSlide();">Yes!😊</button>
+        <!-- <button class="evade-btn" onmouseover="moveButton(this)">No!</button> -->
+        <!-- <button class="evade-btn">No! 😂</button> -->
+        <button class="evade-btn" onclick="showRandomAlert()">No!😂</button>
       </div>
+
+       <!-- Hidden Audio -->
+    <audio id="clickSound">
+      <source src="./BOOMCLIP.mp3" type="audio/mp3">
+  </audio>
 
       <!-- Slide 7 -->
       <div class="slide" data-slide="7">
-        <h2>Yes!, Thank you Lord!...</h2>
+        <h2>Yes!, Thank you Lord!...
+          Alam kong hindi ka napilitan don kanina.. 😂
+        </h2>
         <p>
-          Ang name ng cafe is Our Humble Beginnings 001, sa 99-101, Topaz Building, Ground Floor, Kamias Rd, Quezon City. 
+          Nandito ako ngayon sa ' Our Humble Beginnings 001, dito yan sa 99-101, Topaz Building, Ground Floor, Kamias Rd, Quezon City. 
         </p>
-        <button onclick="prevSlide()">⇠ Back</button>
+
         <button onclick="nextSlide()">Next ⇢</button>
       </div>
 
-   
-      <!-- <div class="slide" data-slide="8">
-        <h2>What time ka dapat nasa inyo na?</h2>
-        <input type="time" id="time-choice" />
-        <button onclick="prevSlide()">⇠ Back</button>
-        <button onclick="nextSlide()">Next ⇢</button>
-      </div> -->
 
       <div class="slide" data-slide="8">
-        <h2>What time ka dapat nasa inyo na?</h2>
+        <h2>What time do you need to be home? 😊</h2>
+        <p>Click mo etong rectangle na gray.. pili ka ng time kung hanggang anong oras kalang para alam ko.</p>
         <input type="time" id="time-choice" />
         <button onclick="prevSlide()">⇠ Back</button>
         <button onclick="nextSlide()">Next ⇢</button>
@@ -360,7 +362,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
       <!-- Slide 9 -->
       <div class="slide" data-slide="9">
-        <h2>Perfect! Isulat ko na sa resibo.</h2>
+        <h2>Ayan almost done na!! Checking some data..
+        </h2>
+        <p>Click to view summary..</p>
         <button onclick="prevSlide()">⇠ Back</button>
         <button onclick="nextSlide()">Next ➔</button>
       </div>
@@ -368,7 +372,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     <!-- Slide 10 -->
     <div class="slide" data-slide="10">
       <h2>See you then! 😊</h2>
-      <p>Here's a summary of our plans:</p>
+      <p>Here's a Summary</p>
       <div class="receipt">
         <h3>Our Humble Beginnings 001</h3>
         <p><strong>Address:</strong> 99-101, Topaz Building, Ground Floor, Kamias Rd, Quezon City</p>
@@ -378,7 +382,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         <hr>
         <p><strong>Total:</strong> Already Paid</p>
       </div>
-      <button onclick="saveReceipt()">💾 I-save to Device</button>
+      <button onclick="saveReceipt()">💾 Save Receipt</button>
     </div>
 
 
@@ -428,6 +432,21 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+// hidden yes sound
+function playSound() {
+    let audio = document.getElementById("clickSound");
+    audio.currentTime = 15; // Start at 15 seconds
+    audio.play();
+
+    // Stop the audio after it reaches 18 seconds
+    audio.ontimeupdate = function () {
+        if (audio.currentTime >= 20) {
+            audio.pause();
+            audio.currentTime = 0; // Reset to the beginning
+            audio.ontimeupdate = null; // Remove the event listener
+        }
+    };
+}
 
 // sliders
 
@@ -469,20 +488,35 @@ function prevSlide() {
   }
 }
 
-function moveButton(btn) {
-  const x = (Math.random() - 0.5) * 200;
-  const y = (Math.random() - 0.5) * 200;
-  btn.style.transform = `translate(${x}px, ${y}px)`;
-}
+// no button hide and show 
 
-// function updateReceipt() {
-//   const time = document.getElementById("time-choice").value;
-//   const summaryTimeElement = document.getElementById("summary-time");
+function moveButton() {
+            let button = document.querySelector(".evade-btn");
+            let screenWidth = window.innerWidth;
+            let screenHeight = window.innerHeight;
+            let btnWidth = button.offsetWidth;
+            let btnHeight = button.offsetHeight;
 
-//   if (summaryTimeElement) {
-//     summaryTimeElement.innerText = time || "N/A";
-//   }
-// }
+            let newX = Math.random() * (screenWidth - btnWidth);
+            let newY = Math.random() * (screenHeight - btnHeight);
+
+            button.style.left = `${newX}px`;
+            button.style.top = `${newY}px`;
+        }
+
+        function showRandomAlert() {
+            let messages = [
+                "Noooooooo!!  ~ Yumi",
+                "Ayaw! Pindutin mo na nag yes kasee.",
+                "Please give me a chance :3",
+                "Pleaseeee.."
+            ];
+            alert(messages[Math.floor(Math.random() * messages.length)]);
+        }
+
+        setInterval(moveButton, 500); // Move every 0.5 seconds
+
+
 
 function updateReceipt() {
   const time24 = document.getElementById("time-choice").value;
@@ -494,52 +528,6 @@ function updateReceipt() {
   }
 }
 
-
-// function saveReceipt() {
-//   // Create a temporary receipt container
-//   const receiptContainer = document.createElement("div");
-//   receiptContainer.classList.add("receipt");
-//   receiptContainer.style.position = "fixed";
-//   receiptContainer.style.top = "-9999px"; // Hide it off-screen
-//   receiptContainer.style.left = "-9999px"; // Hide it off-screen
-//   receiptContainer.style.background = "#fff";
-//   receiptContainer.style.padding = "20px";
-//   receiptContainer.style.border = "2px solid black";
-//   receiptContainer.style.width = "300px";
-//   receiptContainer.style.textAlign = "left"; // Left-align text
-
-
-//   // Populate the receipt content
-//   receiptContainer.innerHTML = `
-//     <h3>Our Humble Beginnings 001</h3>
-//     <p>Address: 99-101, Topaz Building, Ground Floor, Kamias Rd, Quezon City</p>
-//     <hr>
-//     <p><strong>When:</strong> February 16, 2025</p>
-//     <p><strong>Available until:</strong> ${document.getElementById("time-choice").value}</p>
-//     <p><strong>Who are you with:</strong> Jay</p>
-//     <hr>
-//     <p><strong>Total:</strong> Already Paid</p>
-//   `;
-
-
-//   // Append the receipt container to the body
-//   document.body.appendChild(receiptContainer);
-
-//   // Use html2canvas to capture the receipt as an image
-//   html2canvas(receiptContainer).then((canvas) => {
-//     // Create a temporary link element
-//     const link = document.createElement("a");
-//     link.download = "resibo_ni_gwen.png"; // File name
-//     link.href = canvas.toDataURL(); // Convert canvas to image URL
-//     link.click(); // Trigger the download
-
-//     // Clean up: Remove the temporary receipt container
-//     document.body.removeChild(receiptContainer);
-//   }).catch((error) => {
-//     console.error("Error generating receipt:", error);
-//     alert("Failed to save receipt. Please try again.");
-//   });
-// }
 
 
 function saveReceipt() {
