@@ -67,7 +67,7 @@
     color: #e468db;
     margin-top: 10px;
     transition: opacity 0.3sease-in-out;
-    /* background: #fff1ff; */
+    background: #fff1ff;
     padding: 1rem;
     border-radius: 4px;
     width: 300px;
@@ -129,7 +129,7 @@
 
 
 
-const puzzlePiece = document.querySelector('.puzzle-piece');
+    const puzzlePiece = document.querySelector('.puzzle-piece');
 const heartBtn = document.querySelector('.heart-btn');
 const progressBar = document.querySelector('.progress-bar');
 const heartbeatSound = document.getElementById('heartbeatSound');
@@ -140,15 +140,20 @@ const step = 20;
 const maxProgress = 250;
 const maxWidth = 300;
 
+// Updated messages with correct grammar
 const messages = [
-    "Click mo pa gwen ❤️",
-    "Dahan-dahan lang ha, ingatan mo ang puso mo.. ❤️",
-    "Gwen may bayad ‘to ah… may kapalit! Joke! 😏",
-    "Pindot ka nang pindot… sige pa konti nalang! 😆",
-    "Konti pa gwen… progress is real! 😍",
-    "Konti na lang… handa na ako maghintay.. ❤️",
-    "Tuloy-tuloy lang… 💘"
+    "Hi Gwen!, Please keep on clicking the heart!", // First message
+    "Click again, Gwen! ❤️",
+    "Take it slow, take care of your heart.. ❤️",
+    "Gwen, this has a price… there's a catch! Just kidding! 😏",
+    "You're clicking too much… just a little more! 😆",
+    "Almost there, Gwen… progress is real! 😍",
+    "Just a little more… I'm ready to wait.. ❤️",
+    "Keep going… 💘"
 ];
+
+// Display the first message by default
+messageText.textContent = messages[0];
 
 heartBtn.addEventListener('click', () => {
     if (progress < maxProgress) {
@@ -173,18 +178,19 @@ heartBtn.addEventListener('click', () => {
             messageText.style.borderRadius = "10px"; // Optional: Smooth edges
         }
 
-        // Show random funny message
-        if (progress >= maxProgress - (step * 1)) {
-            messageText.textContent = progress >= maxProgress - step 
-                ? "Dalawang pindot na lang… ayan naaaa.. ❤️"
-                : "Dahan-dahan lang ha, ingatan mo ang puso mo.. ❤️";
+        // Show random funny message, but keep the first message only for the first click
+        if (progress === step) {
+            messageText.textContent = messages[0]; // Ensures the first message appears first
+        } else if (progress >= maxProgress - step) {
+            messageText.textContent = "Just two more clicks… it's almost here! ❤️";
         } else {
-            messageText.textContent = messages[Math.floor(Math.random() * messages.length)];
+            messageText.textContent = messages[Math.floor(Math.random() * (messages.length - 1)) + 1];
         }
     } else {
         window.location.href = "envelope4.html"; // Redirect when finished
     }
 });
+
 
 
 
