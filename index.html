@@ -11,7 +11,9 @@
             align-items: center;
             height: 100vh;
             flex-direction: column;
-            background-color: #f8f9fa;
+            /* background-color: #f8f9fa; */
+            background: url('./img/heartAnimatedBG.gif') repeat;
+            background-size: 100px 100px; /* Adjust the size of each tile */
         }
         .progress-container {
             position: relative;
@@ -84,7 +86,7 @@
     const heartbeatSound = document.getElementById('heartbeatSound'); // Get the audio element
 
     let progress = 0;
-    const step = 10; // Slower movement per click
+    const step = 19; // Slower movement per click
     const maxProgress = 250; // Limit for full progress
     const maxWidth = 300; // Progress bar width
 
