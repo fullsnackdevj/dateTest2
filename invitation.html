@@ -302,7 +302,7 @@ input#time-choice {
         <h2>Una sa lahat alam kong hndi naman tayo madalas nagkakausap...</h2>
         <p>
           Very casual lang tayo na magkakilala at nag-uusap, kaya siguro weird talaga itong
-          mga ito sayo. The Lord taught me not to give, show interest, or have intentions toward a woman if I have no plans to pursue her and if He hasn’t placed it in my heart.
+          mga ito sayo. The Lord taught me not to give, show interest, or have intentions toward a woman if I have no plans to pursue her and if She hasn’t placed it in my heart.
         </p>
         <button onclick="prevSlide()">⇠ Back</button>
         <button onclick="nextSlide()">Next ⇢</button>
@@ -390,7 +390,8 @@ input#time-choice {
       <h2>Receipt Saved! 🎉</h2>
       <p>Thank you for saving the receipt! To confirm our date, please send the receipt to Jay in Messenger. 😊</p>
       <p>Looking forward to seeing you soon!</p>
-      <button onclick="closeWindow()">Exit! 😊</button>
+      <!-- <button onclick="closeWindow()">Exit! 😊</button> -->
+      <button onclick="endApp()">End</button>
     </div>
 
 
@@ -400,6 +401,11 @@ input#time-choice {
   </audio>
 
     <script>
+
+function endApp() {
+  window.open('','_self').close();
+
+}
 
 function convertTo12HourFormat(time24) {
   if (!time24) return "N/A"; // Handle empty input
@@ -521,9 +527,9 @@ function moveButton() {
         function showRandomAlert() {
             let messages = [
                 "Noooooooo!!  ~ Yumi",
-                "Ayaw! Pindutin mo na nag yes kasee.",
+                "Ayaw! Pindutin mo na ang yes kasee.",
                 "Please give me a chance :3",
-                "Pleaseeee.."
+                "Embes na maga yes yes, naga 'no no' "
             ];
             alert(messages[Math.floor(Math.random() * messages.length)]);
         }
