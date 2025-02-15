@@ -143,13 +143,49 @@
             transform: translateY(-100px);
             z-index: 2;
         }
+
+        .ptxt{
+            font-weight: normal;
+    font-size: 14px;
+    padding-inline: 1rem;
+    color: #c77cd1;
+        }
+
+        h4{
+            color: #ff9ebc;
+        }
+
+
+
+        @keyframes shakeLeftRight {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-3px); }
+    100% { transform: translateX(0); }
+}
+
+.sneaking-gwenHead {
+    display: flex;
+    width: 100px;
+    margin: 0 auto;
+    position: absolute;
+    left: 60px;
+    top: 112px;
+    animation: shakeLeftRight 1s infinite linear;
+}
+
+
+
     </style>
 </head>
 <body>
     <div class="envelope">
         <div class="back"></div>
         <div class="letter">
-            <div class="text">Invitation</div>
+            <div class="text"><h4>Gwen,</h4><p class="ptxt">Psst… Something special is inside this envelope! Click me! 💌</p></div>
+
+            <img class="sneaking-gwenHead" src="./img/gwenHead2.png" alt="">
         </div>
         <div class="front"></div>
         <div class="top"></div>
