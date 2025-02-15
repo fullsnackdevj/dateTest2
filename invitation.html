@@ -387,11 +387,12 @@ input#time-choice {
 
     <!-- Slide 11 -->
     <div class="slide" data-slide="11">
-      <h2>Please wait while the receipt is being downloaded and saved!🎉</h2>
-      <p>Thank you for saving the receipt! To confirm, please send the receipt to me in Messenger. 😊</p>
+      <h2>Make sure to download the receipt.</h2>
+      <p>Thank you for saving the receipt! To confirm, please send the receipt to my Messenger. 😊</p>
       <p>Can’t wait to see you later! 😊💕</p>
       <!-- <button onclick="closeWindow()">Exit! 😊</button> -->
-      <button onclick="endApp()">Close App</button>
+      <button onclick="prevSlide()">⇠ Back</button>
+      <button onclick="openMessenger()">Click here to send the receipt.</button>
     </div>
 
 
@@ -420,6 +421,12 @@ function endApp() {
       alert("This window cannot be closed programmatically. Please close it manually.");
     }
   }
+}
+
+function openMessenger() {
+  const username = "fullsnackdev"; // Replace with the recipient's Messenger username or ID
+  const url = `https://m.me/${username}`;
+  window.open(url, "_blank");
 }
 
 function convertTo12HourFormat(time24) {
@@ -508,6 +515,7 @@ function nextSlide() {
   if (currentSlide === 11) {
     updateReceipt();
   }
+  
 }
 
 
