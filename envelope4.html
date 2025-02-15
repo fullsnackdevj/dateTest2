@@ -156,52 +156,67 @@
         <div class="shadow"></div>
     </div>
 
-    <audio id="openSound" src="./WHOOSH.mp3" autoplay></audio>
+    <audio id="openSound" src="./WHOOSH.mp3"></audio>
 
-<script>
-    const letter = document.querySelector('.letter');
-    const openSound = document.getElementById('openSound');
-
-    // Attempt to play sound on page load
-    window.addEventListener('load', () => {
-        setTimeout(() => {
-            openSound.play().catch(error => {
-                console.log("Autoplay blocked:", error);
-            });
-        }, 100); // Small delay to allow playback
-    });
-
-    function openLetter() {
-        // Ensure the sound starts from the beginning
-        openSound.currentTime = 0;
-        openSound.play();
-
-        // Stop the sound after 1 second
-        setTimeout(() => {
-            openSound.pause();
-            openSound.currentTime = 0;
-            window.location.href = "invitation.html"; // Redirect after sound stops
-        }, 1000);
-    }
-
-    // Attach event listeners for both mobile and desktop
-    letter.addEventListener('click', openLetter);
-    letter.addEventListener('touchstart', openLetter, { passive: true });
-
-    // Swipe-up detection on mobile
-    let startY = 0;
-
-    letter.addEventListener('touchstart', (e) => {
-        startY = e.touches[0].clientY;
-    });
-
-    letter.addEventListener('touchend', (e) => {
-        let endY = e.changedTouches[0].clientY;
-        if (startY - endY > 50) { // Detects a swipe-up motion
-            openLetter();
+    <script>
+        const letter = document.querySelector('.letter');
+        const openSound = document.getElementById('openSound');
+        let isOpen = false; // Track if the envelope is open
+    
+        // Attempt to play sound on page load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                openSound.play().catch(error => {
+                    console.log("Autoplay blocked:", error);
+                });
+            }, 100); // Small delay to allow playback
+        });
+    
+        function toggleLetter() {
+            if (!isOpen) {
+                openLetter();
+            } else {
+                closeLetter();
+            }
         }
-    });
-</script>
+    
+        function openLetter() {
+            isOpen = true;
+            openSound.currentTime = 0;
+            openSound.play();
+    
+            setTimeout(() => {
+                openSound.pause();
+                openSound.currentTime = 0;
+                window.location.href = "invitation.html"; // Redirect after sound stops
+            }, 1000);
+        }
+    
+        function closeLetter() {
+            isOpen = false;
+            // You can add an animation or logic to "close" the letter here if needed
+            console.log("Letter closed");
+        }
+    
+        // Attach event listeners for both mobile and desktop
+        letter.addEventListener('click', toggleLetter);
+        letter.addEventListener('touchstart', toggleLetter, { passive: true });
+    
+        // Swipe-up detection for mobile
+        let startY = 0;
+    
+        letter.addEventListener('touchstart', (e) => {
+            startY = e.touches[0].clientY;
+        });
+    
+        letter.addEventListener('touchend', (e) => {
+            let endY = e.changedTouches[0].clientY;
+            if (startY - endY > 50) { // Detects a swipe-up motion
+                toggleLetter();
+            }
+        });
+    </script>
+    
 
     
 
