@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Espesyal na Pag-anyaya</title>
+    <title>Ask Gwen on a Date</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=Old+Standard+TT&display=swap"
       rel="stylesheet" />
@@ -366,7 +366,7 @@ input#time-choice {
         </h2>
         <p>Click to view summary..</p>
         <button onclick="prevSlide()">⇠ Back</button>
-        <button onclick="nextSlide()">Next ➔</button>
+        <button onclick="nextSlide()">Next ⇢</button>
       </div>
 
     <!-- Slide 10 -->
@@ -382,7 +382,15 @@ input#time-choice {
         <hr>
         <p><strong>Total:</strong> Already Paid</p>
       </div>
-      <button onclick="saveReceipt()">💾 Save Receipt</button>
+      <button onclick="saveReceipt(); nextSlide()">💾 Save Receipt</button>
+    </div>
+
+    <!-- Slide 11 -->
+    <div class="slide" data-slide="11">
+      <h2>Receipt Saved! 🎉</h2>
+      <p>Thank you for saving the receipt! To confirm our date, please send the receipt to Jay in Messenger. 😊</p>
+      <p>Looking forward to seeing you soon!</p>
+      <button onclick="closeWindow()">Exit! 😊</button>
     </div>
 
 
@@ -431,6 +439,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 500); // Delay before fade-out starts
 });
 
+// end app
+
+function closeWindow() {
+  window.open('', '_self').close();
+}
 
 // hidden yes sound
 function playSound() {
@@ -471,10 +484,11 @@ function nextSlide() {
   }
 
   // Update the receipt when navigating to Slide 10
-  if (currentSlide === 10) {
+  if (currentSlide === 11) {
     updateReceipt();
   }
 }
+
 
 function prevSlide() {
   if (currentSlide > 1) {
