@@ -387,11 +387,11 @@ input#time-choice {
 
     <!-- Slide 11 -->
     <div class="slide" data-slide="11">
-      <h2>Receipt Saved! 🎉</h2>
-      <p>Thank you for saving the receipt! To confirm our date, please send the receipt to Jay in Messenger. 😊</p>
-      <p>Looking forward to seeing you soon!</p>
+      <h2>Please wait while the receipt is being downloaded and saved!🎉</h2>
+      <p>Thank you for saving the receipt! To confirm, please send the receipt to me in Messenger. 😊</p>
+      <p>Can’t wait to see you later! 😊💕</p>
       <!-- <button onclick="closeWindow()">Exit! 😊</button> -->
-      <button onclick="endApp()">End</button>
+      <button onclick="endApp()">Close App</button>
     </div>
 
 
@@ -403,8 +403,23 @@ input#time-choice {
     <script>
 
 function endApp() {
-  window.open('','_self').close();
-
+  // Check if the window was opened via JavaScript
+  if (window.opener) {
+    // Close the window if it was opened via JavaScript
+    window.close();
+  } else if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    // Handle mobile devices
+    // Redirect to a blank page or a specific exit page
+    window.location.href = 'about:blank'; // or your custom exit page URL
+  } else {
+    // For desktop browsers, try to close the window
+    try {
+      window.open('', '_self').close();
+    } catch (e) {
+      // If closing fails, inform the user
+      alert("This window cannot be closed programmatically. Please close it manually.");
+    }
+  }
 }
 
 function convertTo12HourFormat(time24) {
